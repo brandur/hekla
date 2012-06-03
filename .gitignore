@@ -1,0 +1,4 @@
+.bundle
+.rbenv-version
+.sass-cache
+*.gem
