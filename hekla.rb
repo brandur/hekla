@@ -10,6 +10,10 @@ helpers do
       slice(:title, :slug, :summary, :content, :published_at)
   end
 
+  def article_url(article)
+    "/#{article.to_param}"
+  end
+
   def authenticate_with_http_basic
     @auth ||= Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials &&
@@ -35,15 +39,32 @@ helpers do
 end
 
 get "/" do
+  Hekla.log :get_articles_index, pjax: pjax?
+  @articles = Article.ordered.limit(10)
   slim :index, :layout => !pjax?
 end
 
+get "/articles.atom" do
+  Hekla.log :get_articles_index, pjax: pjax?, format: "atom"
+  @articles = Article.ordered.limit(20)
+  builder :index
+end
+
 get "/archive" do
+  Hekla.log :get_articles_archive, pjax: pjax?
+  @articles = Article.ordered.group_by { |a| a.published_at.year }
+    .sort.reverse
   slim :archive, :layout => !pjax?
 end
 
-get "/:article" do
+get "/:id" do |id|
+  Hekla.log :get_article, pjax: pjax?, id: id
+  @article = Article.find_by_slug!(id)
   slim :article, :layout => !pjax?
+end
+
+get "/articles/:id" do |id|
+  redirect to("/#{id}")
 end
 
 post "/articles" do

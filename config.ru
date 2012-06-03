@@ -1,4 +1,5 @@
-require 'bundler/setup'
+require "bundler/setup"
+require "logger"
 Bundler.require
 
 # so logging output appears properly
@@ -21,6 +22,7 @@ Hekla::log :assets, path: settings.assets
 Hekla::log :views,  path: settings.views
 
 # keep database connection separate from test suites
+ActiveRecord::Base.logger = Logger.new($stdout)
 ActiveRecord::Base.establish_connection(Hekla::Config.database_url)
 
 map "/assets" do

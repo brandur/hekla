@@ -17,7 +17,27 @@ describe Hekla do
   end
 
   before do
+    stub(Hekla::Config).theme { "the-surf" }
+    set :views, settings.root + "/../themes/#{Hekla::Config.theme}/views"
+
     stub(Hekla::Config).http_api_key { "KEY" }
+  end
+
+  describe "GET /" do
+    it "shows front page articles" do
+      get "/"
+      e
+      last_response.status.must_equal 200
+    end
+  end
+
+  describe "GET /articles.atom" do
+    it "provides an Atom feed" do
+      get "/articles.atom"
+      e
+      last_response.status.must_equal 200
+      last_response.body.include?("http://www.w3.org/2005/Atom").must_equal true
+    end
   end
 
   describe "POST /articles" do
