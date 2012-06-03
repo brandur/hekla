@@ -3,12 +3,11 @@ require_relative "models/article"
 helpers do
   def article_params
     if params[:attributes] && params[:content]
-      attributes = eval(params[:attributes])
-      attributes[:content] = params[:content]
+      eval(params[:attributes]).merge!({ content: params[:content] })
     else
-      attributes = params[:article]
-    end
-    attributes.slice(:title, :slug, :summary, :content, :published_at)
+      params[:article]
+    end.
+      slice(:title, :slug, :summary, :content, :published_at)
   end
 
   def authenticate_with_http_basic
