@@ -9,8 +9,18 @@ require "rr"
 require_relative("../lib/hekla")
 require_relative("../hekla")
 
+class Hash
+  def without(*args)
+    self.reject { |k, v| args.include?(k) }
+  end
+end
+
 class MiniTest::Spec
   include RR::Adapters::TestUnit
+
+  before do
+    Article.delete_all
+  end
 end
 
 def e
