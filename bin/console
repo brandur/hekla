@@ -1,11 +1,12 @@
 #!/usr/bin/env ruby
 
+require "active_record"
 require "irb"
 
 $: << "./lib"
 require "hekla"
 
-require_relative "models/article"
+require_relative "../models/article"
 
 ActiveRecord::Base.establish_connection(Hekla::Config.database_url)
 
