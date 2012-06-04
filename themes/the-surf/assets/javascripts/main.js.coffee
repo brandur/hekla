@@ -1,1 +1,2 @@
-$('a[data-pjax]').pjax()
+$(document).ready ->
+  $('a[data-pjax]').pjax()
