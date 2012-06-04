@@ -4,6 +4,10 @@ helpers do
   include Hekla::Helpers
 end
 
+error ActiveRecord::RecordNotFound do
+  404
+end
+
 get "/" do
   Hekla.log :get_articles_index, pjax: pjax?
   cache do

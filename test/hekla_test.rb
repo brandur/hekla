@@ -27,6 +27,12 @@ describe Hekla do
     stub(Hekla).development? { false }
   end
 
+  it "responds with a 404" do
+    set :show_exceptions, false
+    get "/does-not-exist"
+    last_response.status.must_equal 404
+  end
+
   describe "GET /" do
     it "shows front page articles" do
       mock(Article).ordered.times(any_times).mock! do |m|
