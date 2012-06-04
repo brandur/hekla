@@ -2,6 +2,7 @@ require "hekla/monkey_patch"
 
 require "hekla/config"
 require "hekla/log"
+require "hekla/lorem_ipsum"
 
 module Hekla
   extend Log

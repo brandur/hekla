@@ -1,0 +1,15 @@
+- prev_article = Article.ordered.where("published_at < ?", @article.published_at).first
+- next_article = Article.ordered.where("published_at > ?", @article.published_at).last
+- if prev_article || next_article
+  #siblings
+    .row
+      #prev.col_6
+        - if prev_article
+          == link_to "&larr; #{prev_article.title}", prev_article, "data-pjax" => "#content"
+        - else
+          | &nbsp;
+      #next.col_6.last
+        - if next_article
+          == link_to "#{next_article.title} &rarr;", next_article, "data-pjax" => "#content"
+        - else
+          | &nbsp;

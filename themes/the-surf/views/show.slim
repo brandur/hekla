@@ -1,1 +1,5 @@
-= @article.title
+- if pjax?
+  title= @title
+== render :slim, :"_article", layout: false
+== render :slim, :"_siblings", layout: false
+== render :slim, :"_other_articles", layout: false

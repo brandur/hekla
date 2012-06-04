@@ -1,3 +1,7 @@
-strong
-  | Hello, world!
-  | and more ...
+- if @articles.first
+  - @article = @articles.first
+  - if pjax?
+    title The Surf
+  == render :slim, :"_article", layout: false
+  == render :slim, :"_siblings", layout: false
+  == render :slim, :"_other_articles", layout: false

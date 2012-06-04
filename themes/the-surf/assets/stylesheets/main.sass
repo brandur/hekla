@@ -1,2 +1,95 @@
+$secondary_color: #aaa
+$bigger: 21px
+$medium: 19px
+$smaller: 16px
+
 body
-  font-size: 20px
+  background: #fff
+  font-family: 'eb garamond', 'palatino linotype', palatino, 'times new roman', serif
+  font-size: $bigger
+  line-height: 1.5em
+  margin: 60px 100px
+
+  h1
+    color: #336699
+    text-transform: uppercase
+    margin: 0 0 30px 0
+
+  h2
+    text-transform: uppercase
+    margin: 0 0 20px 0
+
+  a, a:visited, a:hover
+    color: #336699
+    text-decoration: none
+
+  p
+    margin: 20px 0
+
+  a:hover
+    color: #336699
+    text-decoration: underline
+
+  .secondary
+    color: $secondary_color
+
+  .row
+    margin: 40px 0
+    max-width: 600px
+
+  .wave
+    color: #336699
+
+  header
+    #title 
+      font-family: 'playfair display', 'eb garamond', 'palatino linotype', palatino, 'times new roman', serif
+      font-size: 40px
+      line-height: 2em
+
+      a, a:visited, a:hover
+        color: #000
+        text-decoration: none
+
+  #content
+
+    article
+      hyphens: auto
+      -moz-hyphens: auto
+      -webkit-hyphens: auto
+
+      .extra
+        color: $secondary_color
+        font-size: $smaller
+        margin-bottom: 0
+
+    #archive
+
+      .extra
+        color: $secondary_color
+        font-size: $smaller
+
+    #siblings
+      font-size: $medium
+
+      #next
+        text-align: right
+
+    #other_articles
+
+      ul
+
+        li
+          margin: 20px 0
+
+          .summary
+            margin: 10px 0 10px 20px
+            hyphens: auto
+            -moz-hyphens: auto
+            -webkit-hyphens: auto
+
+  footer
+    color: $secondary_color
+    font-size: $smaller
+
+    a, a:visited, a:hover
+      color: $secondary_color

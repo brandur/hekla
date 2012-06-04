@@ -11,8 +11,8 @@ class Article < ActiveRecord::Base
     render_markdown(summary)
   end
 
-  def to_param
-    slug
+  def to_path
+    "/#{slug}"
   end
 
   private
