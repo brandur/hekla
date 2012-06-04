@@ -4,29 +4,38 @@ require "rack/test"
 describe Hekla do
   include Rack::Test::Methods
 
-  def app
-    Sinatra::Application
-  end
-
-  def valid_attributes
+  let(:app)              { Sinatra::Application }
+  let(:article)          { Article.new(valid_attributes) }
+  let(:cache)            { CacheStub.new }
+  let(:valid_attributes) {
     { title:        "About",
       slug:         "about",
       summary:      "About the Surf.",
       content:      "About the Surf.",
       published_at: Time.now }
-  end
+  }
 
   before do
-    set :cache, stub!
+    set :cache, cache
 
     stub(Hekla::Config).theme { "the-surf" }
     set :views, settings.root + "/../themes/#{Hekla::Config.theme}/views"
 
     stub(Hekla::Config).http_api_key { "KEY" }
+
+    # so we can test fancy stuff like caching
+    stub(Hekla).development? { false }
   end
 
   describe "GET /" do
     it "shows front page articles" do
+      mock(Article).ordered.times(any_times).mock! do |m|
+        m.limit(10).times(any_times) { [article] }
+        m.where.times(any_times).with_any_args.mock! do |m2|
+          m2.first { article }
+          m2.last { article }
+        end
+      end
       get "/"
       last_response.status.must_equal 200
     end
@@ -34,6 +43,7 @@ describe Hekla do
 
   describe "GET /articles.atom" do
     it "provides an Atom feed" do
+      mock(Article).ordered.mock!.limit(20) { [article] }
       get "/articles.atom"
       last_response.status.must_equal 200
       last_response.body.include?("http://www.w3.org/2005/Atom").must_equal true
@@ -42,21 +52,48 @@ describe Hekla do
 
   describe "GET /:id" do
     it "shows an article" do
-      article = Article.new(valid_attributes)
       mock(Article).find_by_slug!("about") { article }
       get "/about"
       last_response.status.must_equal 200
       last_response.body.include?("<html").must_equal true
     end
 
-   it "shows an article without layout" do
-      article = Article.new(valid_attributes)
+    it "shows an article without layout" do
       mock(Article).find_by_slug!("about") { article }
       get "/about", {}, "X-PJAX" => true
-  e
       last_response.status.must_equal 200
       last_response.body.include?("<html").must_equal false
-   end
+      last_response.body.include?("<title").must_equal true
+    end
+
+    it "caches an article" do
+      mock(Article).find_by_slug!("about") { article }
+      get "/about"
+      last_response.status.must_equal 200
+      cache.get("/about").include?("<html").must_equal true
+    end
+
+    it "caches an article without layout" do
+      mock(Article).find_by_slug!("about") { article }
+      get "/about", {}, "X-PJAX" => true
+      last_response.status.must_equal 200
+      cache.get("/about__pjax").include?("<html").must_equal false
+      cache.get("/about__pjax").include?("<title").must_equal true
+    end
+
+    it "shows a cached article" do
+      cache.set("/about", "About the Surf.")
+      get "/about"
+      last_response.status.must_equal 200
+      last_response.body.must_equal "About the Surf."
+    end
+
+    it "shows a cached article without layout" do
+      cache.set("/about__pjax", "About the Surf.")
+      get "/about", {}, "X-PJAX" => true
+      last_response.status.must_equal 200
+      last_response.body.must_equal "About the Surf."
+    end
   end
 
   describe "GET /articles/:id" do

@@ -12,8 +12,8 @@ xml.feed "xml:lang" => "en-US", :xmlns => "http://www.w3.org/2005/Atom" do
       xml.content article.content_html, type: "html"
       xml.published article.published_at.to_s(:rfc822)
       xml.updated article.published_at.to_s(:rfc822)
-      xml.link article_url(article)
-      xml.id "tag:the-surf.org,#{article.published_at.strftime('%F')}:#{article_url(article)}.html"
+      xml.link "http://the-surf.org#{article.to_path}"
+      xml.id "tag:the-surf.org,#{article.published_at.strftime('%F')}:http://the-surf.org#{article.to_path}.html"
       xml.author do
         xml.name "Brandur Leach"
         xml.uri "http://brandur.org"

@@ -18,6 +18,7 @@ gem "uglifier"
 
 group :development, :test do
   gem "debugger",        "~> 1.1.3"
+  gem "m",               "~> 1.1"
   gem "rack-test"
   gem "rake",            "~> 0.9.2.2"
   gem "rr",              "~> 1.0.4"

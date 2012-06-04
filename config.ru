@@ -16,7 +16,7 @@ require "sinatra/reloader" if Hekla.development?
 
 configure do
   set :assets, settings.root + "/themes/#{Hekla::Config.theme}/assets"
-  set :cache,  Dalli::Client.new
+  set :cache,  Dalli::Client.new if Hekla.development?
   set :views,  settings.root + "/themes/#{Hekla::Config.theme}/views"
 end
 Hekla::log :assets, path: settings.assets
@@ -25,6 +25,10 @@ Hekla::log :views,  path: settings.views
 # keep database connection separate from test suites
 ActiveRecord::Base.logger = Logger.new($stdout)
 ActiveRecord::Base.establish_connection(Hekla::Config.database_url)
+
+# @todo: fix escape having to be disabled. possible bug in Slim ==.
+Slim::Engine.set_default_options format: :html5, pretty: true,
+  disable_escape: true
 
 map "/assets" do
   assets = Sprockets::Environment.new do |env|

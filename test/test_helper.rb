@@ -9,6 +9,24 @@ require "rr"
 require_relative("../lib/hekla")
 require_relative("../hekla")
 
+class CacheStub
+  def initialize
+    @cache = {}
+  end
+
+  def clear
+    @cache.clear
+  end
+
+  def get(key)
+    @cache[key]
+  end
+
+  def set(key, value)
+    @cache[key] = value
+  end
+end
+
 class Hash
   def without(*args)
     self.reject { |k, v| args.include?(k) }

@@ -1,6 +1,7 @@
 require "hekla/monkey_patch"
 
 require "hekla/config"
+require "hekla/helpers"
 require "hekla/log"
 require "hekla/lorem_ipsum"
 
