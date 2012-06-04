@@ -26,7 +26,6 @@ describe Hekla do
   describe "GET /" do
     it "shows front page articles" do
       get "/"
-      e
       last_response.status.must_equal 200
     end
   end
@@ -34,9 +33,33 @@ describe Hekla do
   describe "GET /articles.atom" do
     it "provides an Atom feed" do
       get "/articles.atom"
-      e
       last_response.status.must_equal 200
       last_response.body.include?("http://www.w3.org/2005/Atom").must_equal true
+    end
+  end
+
+  describe "GET /:id" do
+    it "shows an article" do
+      article = Article.new(valid_attributes)
+      mock(Article).find_by_slug!("about") { article }
+      get "/about"
+      last_response.status.must_equal 200
+      last_response.body.include?("<html").must_equal true
+    end
+
+   it "shows an article without layout" do
+      article = Article.new(valid_attributes)
+      mock(Article).find_by_slug!("about") { article }
+      get "/about", {}, "X-PJAX" => true
+      last_response.status.must_equal 200
+      last_response.body.include?("<html").must_equal false
+   end
+  end
+
+  describe "GET /articles/:id" do
+    it "redirects to /:id" do
+      get "/articles/about"
+      last_response.status.must_equal 302
     end
   end
 

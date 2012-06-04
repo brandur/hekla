@@ -60,7 +60,7 @@ end
 get "/:id" do |id|
   Hekla.log :get_article, pjax: pjax?, id: id
   @article = Article.find_by_slug!(id)
-  slim :article, :layout => !pjax?
+  slim :show, :layout => !pjax?
 end
 
 get "/articles/:id" do |id|
