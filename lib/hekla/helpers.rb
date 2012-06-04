@@ -17,7 +17,7 @@ module Hekla
 
     def authorized?
       authenticate_with_http_basic do |username, password|
-        password == Hekla::Config.http_api_key
+        password == Config.http_api_key
       end
     end
 
