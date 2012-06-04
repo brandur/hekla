@@ -17,6 +17,8 @@ describe Hekla do
   end
 
   before do
+    set :cache, stub!
+
     stub(Hekla::Config).theme { "the-surf" }
     set :views, settings.root + "/../themes/#{Hekla::Config.theme}/views"
 
@@ -51,6 +53,7 @@ describe Hekla do
       article = Article.new(valid_attributes)
       mock(Article).find_by_slug!("about") { article }
       get "/about", {}, "X-PJAX" => true
+  e
       last_response.status.must_equal 200
       last_response.body.include?("<html").must_equal false
    end

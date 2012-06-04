@@ -32,8 +32,8 @@ describe Article do
     end
   end
 
-  it "uses its slug as its parameter" do
-    Article.new(valid_attributes).to_param.must_equal valid_attributes[:slug]
+  it "uses produces a path back to itself" do
+    Article.new(valid_attributes).to_path.must_equal "/#{valid_attributes[:slug]}"
   end
 
   it "renders content as markdown" do

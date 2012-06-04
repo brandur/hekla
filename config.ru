@@ -16,6 +16,7 @@ require "sinatra/reloader" if Hekla.development?
 
 configure do
   set :assets, settings.root + "/themes/#{Hekla::Config.theme}/assets"
+  set :cache,  Dalli::Client.new
   set :views,  settings.root + "/themes/#{Hekla::Config.theme}/views"
 end
 Hekla::log :assets, path: settings.assets

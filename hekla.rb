@@ -1,6 +1,7 @@
 require_relative "models/article"
 
-Slim::Engine.set_default_options format: :html5, pretty: true, disable_escape: true
+Slim::Engine.set_default_options format: :html5, pretty: true,
+  disable_escape: true
 
 helpers do
   def article_params
@@ -31,6 +32,18 @@ helpers do
     end
   end
 
+  def cache
+    key = request.path_info
+    key += "__pjax" if pjax?
+    if cached = settings.cache.get(key) && !Hekla.development?
+      cached
+    else
+      cached = yield
+      settings.cache.set(key)
+      cached
+    end
+  end
+
   def link_to(title, uri, attrs = {})
     uri = uri.to_path if uri.kind_of?(ActiveRecord::Base)
     attr_str = attrs.map { |k, v| %{#{k}="#{v}"} }.join(" ")
@@ -47,13 +60,13 @@ get "/" do
   Hekla.log :get_articles_index, pjax: pjax?
   @articles = Article.ordered.limit(10)
   Hekla.log :found_articles, count: @articles.count
-  slim :index, layout: !pjax?
+  cache { slim :index, layout: !pjax? }
 end
 
 get "/articles.atom" do
   Hekla.log :get_articles_index, pjax: pjax?, format: "atom"
   @articles = Article.ordered.limit(20)
-  builder :index
+  cache { builder :index }
 end
 
 get "/archive" do
@@ -61,14 +74,14 @@ get "/archive" do
   @articles = Article.ordered.group_by { |a| a.published_at.year }
     .sort.reverse
   @title = "Archive"
-  slim :archive, layout: !pjax?
+  cache { slim :archive, layout: !pjax? }
 end
 
 get "/:id" do |id|
   Hekla.log :get_article, pjax: pjax?, id: id
   @article = Article.find_by_slug!(id)
   @title = @article.title
-  slim :show, layout: !pjax?
+  cache { slim :show, layout: !pjax? }
 end
 
 # redirect old style permalinks
