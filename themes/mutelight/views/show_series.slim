@@ -1,0 +1,18 @@
+- if pjax?
+  title= @title
+- content_for(:rss) do
+  link href="/series/#{@series.permalink}.atom" rel='alternate' title="#{@series.title}" type='application/atom+xml'
+h1.series_header
+  = @series.title
+  span.rss
+    == link_to "/series/#{@series.permalink}.atom", :title => "Subscribe to '#{@series.title}' Atom feed" do
+      = image_tag 'rss.png'
+.clear
+.content== @series.content_html
+h2 Articles in This Series
+ol.article
+  - @series.articles.each do |article|
+    li
+      == link_to article.title, article, "data-pjax" => "#content"
+      span.alternate
+        |  &mdash; #{pretty_time(article[:published_at])}

@@ -1,0 +1,9 @@
+- if pjax?
+  title Mutelight
+h1 Newest Articles
+ul.article
+  - @articles.each do |article|
+    li
+      == link_to article.title, article, "data-pjax" => "#content"
+      span.alternate
+        |  &mdash; #{article.published_at.strftime('%B %e, %Y')}

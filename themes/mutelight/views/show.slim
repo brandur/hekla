@@ -1,0 +1,22 @@
+article
+  - # @todo: either get series back, or get rid of them
+  - if @article[:series]
+    .series 
+      span.series_title= link_to @article.series.title, @article.series, "data-pjax" => "#content"
+      | : Article ##{@article.series_position} in the series
+  h1= @article.title
+  .content
+    == @article.content_html
+    p.meta
+      | Posted on 
+      strong= @article.published_at.strftime('%B %e, %Y')
+      - # @todo: either get location back, or lose it
+      /|  from 
+      /strong= @article.location
+h2 Newest Articles
+ul.article
+  - Article.ordered.limit(3).where("id <> ?", @article.id).each do |article|
+    li
+      == link_to article.title, article, "data-pjax" => "#content"
+      span.alternate
+        |  &mdash; #{{article.published_at.strftime('%B %e, %Y')}}

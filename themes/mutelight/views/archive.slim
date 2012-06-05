@@ -1,0 +1,11 @@
+- if pjax?
+  title= @title
+h1 All Articles
+- @articles.each do |year, articles|
+  h2= year
+  ul.article
+    - articles.each do |article|
+      li
+        == link_to article.title, article, "data-pjax" => "#content"
+        span.alternate
+          |  &mdash; #{{article.published_at.strftime('%B %e, %Y')}}
