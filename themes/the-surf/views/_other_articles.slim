@@ -6,7 +6,7 @@
         ul
           - Article.ordered.limit(3).where("id <> ?", @article.id).each do |article|
             li
-              p= link_to article.title, article, "data-pjax" => "#content"
+              p== link_to article.title, article, "data-pjax" => "#content"
               .summary
                 p== article.summary_html
         p== link_to "All other articles. &rarr;", "/archive", "data-pjax" => "#content"
