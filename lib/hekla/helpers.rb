@@ -1,12 +1,15 @@
 module Hekla
   module Helpers
     def article_params
-      if params[:attributes] && params[:content]
+      metadata = if params[:attributes] && params[:content]
         eval(params[:attributes]).merge!({ content: params[:content] })
       else
         params[:article]
-      end.
-        slice(:title, :slug, :summary, :content, :published_at)
+      end
+      attrs = metadata.delete_if { |k, v|
+        k.include?(:title, :slug, :summary, :content, :published_at)
+      }
+      attrs.merge({ metadata: metadata })
     end
 
     def authenticate_with_http_basic
