@@ -14,22 +14,24 @@ Deployment
 
 Deploy to Heroku:
 
-    git clone https://github.com/brandur/hekla.git
-    cd hekla
-    heroku create -s cedar the-surf
-    export HTTP_API_KEY=$(ruby -e "require 'securerandom'; puts SecureRandom.hex(20))
-    heroku config:add THEME=the-surf HTTP_API_KEY=$HTTP_API_KEY
-    git push heroku
-    ::: bash
+``` bash
+git clone https://github.com/brandur/hekla.git
+cd hekla
+heroku create -s cedar the-surf
+export HTTP_API_KEY=$(ruby -e "require 'securerandom'; puts SecureRandom.hex(20))
+heroku config:add THEME=the-surf HTTP_API_KEY=$HTTP_API_KEY
+git push heroku
+```
 
 Upload an article using a template like [the-surf-content](https://github.com/brandur/the-surf-content):
 
-    git clone https://github.com/brandur/the-surf-content.git
-    export THE_SURF_HTTP_AUTH_KEY=$HTTP_API_KEY
-    export THE_SURF_HOST="https://the-surf.herokuapp.com"
-    bin/new articles/test-article
-    bin/create articles/test-article.
-    ::: bash
+``` bash
+git clone https://github.com/brandur/the-surf-content.git
+export THE_SURF_HTTP_AUTH_KEY=$HTTP_API_KEY
+export THE_SURF_HOST="https://the-surf.herokuapp.com"
+bin/new articles/test-article
+bin/create articles/test-article.
+```
 
 Local
 -----
