@@ -4,7 +4,8 @@ $.SyntaxHighlighter.init
   'wrapLines': true 
 
 $(document).ready ->
-  $('a[data-pjax]').pjax()
+  $('a[data-pjax]').pjax
+    'timeout': 2000
 
 expanded = false
 $('#header').live 'click', ->

@@ -1,2 +1,3 @@
 $(document).ready ->
-  $('a[data-pjax]').pjax()
+  $('a[data-pjax]').pjax
+    'timeout': 2000
