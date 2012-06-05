@@ -26,7 +26,6 @@ Hekla::log :views,  path: settings.views
 ActiveRecord::Base.logger = Logger.new($stdout)
 ActiveRecord::Base.establish_connection(Hekla::Config.database_url)
 
-# @todo: fix escape having to be disabled. possible bug in Slim ==.
 Slim::Engine.set_default_options format: :html5, pretty: true
 
 map "/assets" do
