@@ -24,7 +24,7 @@ Deploy to Heroku:
 Upload an article using a template like [the-surf-content](https://github.com/brandur/the-surf-content):
 
     git clone https://github.com/brandur/the-surf-content.git
-    export THE_SURF_HTTP_AUTH_KEY=$(ruby -e "require 'securerandom'; puts SecureRandom.hex(20))
+    export THE_SURF_HTTP_AUTH_KEY=$HTTP_API_KEY
     export THE_SURF_HOST="https://the-surf.herokuapp.com"
     bin/new articles/test-article
     bin/create articles/test-article.
