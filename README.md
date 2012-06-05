@@ -38,12 +38,16 @@ Local
 
 Settings are pulled from `.env`:
 
-    bundle install
-    foreman start
+``` bash
+bundle install
+foreman start
+```
 
 Testing
 -------
 
 Run the test suite with:
 
-    bundle exec rake test
+``` bash
+bundle exec rake test
+```
