@@ -20,6 +20,7 @@ Deploy to Heroku:
     export HTTP_API_KEY=$(ruby -e "require 'securerandom'; puts SecureRandom.hex(20))
     heroku config:add THEME=the-surf HTTP_API_KEY=$HTTP_API_KEY
     git push heroku
+    ::: bash
 
 Upload an article using a template like [the-surf-content](https://github.com/brandur/the-surf-content):
 
@@ -28,6 +29,7 @@ Upload an article using a template like [the-surf-content](https://github.com/br
     export THE_SURF_HOST="https://the-surf.herokuapp.com"
     bin/new articles/test-article
     bin/create articles/test-article.
+    ::: bash
 
 Local
 -----
