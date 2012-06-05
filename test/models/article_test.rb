@@ -41,6 +41,11 @@ describe Article do
       "<p><strong>strong text</strong></p>\n"
   end
 
+  it "translates language in code blocks" do
+    Article.new(:content => %{<code class="ruby">}).content_html.must_equal \
+      %{<p><code class="language-ruby"></p>\n}
+  end
+
   it "renders summary as markdown" do
     Article.new(:summary => "**strong text**").summary_html.must_equal \
       "<p><strong>strong text</strong></p>\n"

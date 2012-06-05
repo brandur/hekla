@@ -54,7 +54,7 @@ post "/articles" do
   authorized!
   @article = Article.new(article_params)
   if @article.save
-    settings.cache.flush
+    cache_clear
     [201, @article.to_json]
   else
     [422, @article.errors.to_json]
@@ -66,7 +66,7 @@ put "/articles/:id" do |id|
   authorized!
   @article = Article.find_by_slug!(id)
   if @article.update_attributes(article_params)
-    settings.cache.flush
+    cache_clear
     204
   else
     [422, @article.errors.to_json]
@@ -78,6 +78,6 @@ delete "/articles/:id" do |id|
   authorized!
   @article = Article.find_by_slug!(id)
   @article.destroy
-  settings.cache.flush
+  cache_clear
   204
 end

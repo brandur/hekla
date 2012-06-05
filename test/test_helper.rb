@@ -14,7 +14,7 @@ class CacheStub
     @cache = {}
   end
 
-  def clear
+  def flush
     @cache.clear
   end
 

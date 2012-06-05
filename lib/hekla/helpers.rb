@@ -46,6 +46,10 @@ module Hekla
       end
     end
 
+    def cache_clear
+      settings.cache.flush unless Hekla.development?
+    end
+
     # @todo: OMG HOLY SHIT FUGLY
     def link_to(*args)
       attrs = args.last.is_a?(Hash) ? args.pop : {}

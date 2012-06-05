@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20120219041034) do
   create_table "articles", :force => true do |t|
     t.string   "title",        :null => false
     t.string   "slug",         :null => false
-    t.text     "summary",      :null => false
+    t.text     "summary"
     t.text     "content",      :null => false
     t.datetime "published_at", :null => false
   end
