@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-require "active_record"
+require "bundler/setup"
+Bundler.require
+
 require "irb"
 
 $: << "./lib"
@@ -8,6 +10,6 @@ require "hekla"
 
 require_relative "../models/article"
 
-ActiveRecord::Base.establish_connection(Hekla::Config.database_url)
+DB = Sequel.connect(Hekla::Config.database_url)
 
 IRB.start

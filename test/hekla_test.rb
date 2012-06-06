@@ -118,14 +118,16 @@ describe Hekla do
 
     it "creates an article" do
       authorize "", "KEY"
-      any_instance_of(Article) { |a| mock(a).save { true } }
+      mock(article).save { true }
+      mock(Article).new.with_any_args { article }
       post "/articles", { article: valid_attributes }
       last_response.status.must_equal 201
     end
 
     it "creates an article with file push" do
       authorize "", "KEY"
-      any_instance_of(Article) { |a| mock(a).save { true } }
+      mock(article).save { true }
+      mock(Article).new.with_any_args { article }
       time_str = "Time.parse(#{valid_attributes[:published_at]})"
       post "/articles", {
         attributes: valid_attributes.slice(:title, :summary).
@@ -136,7 +138,8 @@ describe Hekla do
 
     it "fails to create an article" do
       authorize "", "KEY"
-      any_instance_of(Article) { |a| mock(a).save { false } }
+      mock(article).save { raise(Sequel::ValidationFailed.new([])) }
+      mock(Article).new.with_any_args { article }
       post "/articles", { article: valid_attributes }
       last_response.status.must_equal 422
       last_response.body.parse_json.wont_equal nil
@@ -152,18 +155,16 @@ describe Hekla do
 
     it "updates an article" do
       authorize "", "KEY"
-      article = Article.new(valid_attributes)
-      mock(article).save { true }
       mock(Article).find_by_slug!("about") { article }
+      mock(article).save.with_any_args { true }
       put "/articles/about", { article: valid_attributes }
       last_response.status.must_equal 204
     end
 
     it "updates an article with file push" do
       authorize "", "KEY"
-      article = Article.new(valid_attributes)
-      mock(article).save { true }
       mock(Article).find_by_slug!("about") { article }
+      mock(article).save.with_any_args { true }
       time_str = "Time.parse(#{valid_attributes[:published_at]})"
       put "/articles/about", {
         attributes: valid_attributes.slice(:title, :summary).
@@ -174,10 +175,12 @@ describe Hekla do
 
     it "fails to update an article" do
       authorize "", "KEY"
-      article = Article.new(valid_attributes)
-      mock(article).save { false }
       mock(Article).find_by_slug!("about") { article }
+      mock(article).save.with_any_args {
+        raise(Sequel::ValidationFailed.new([]))
+      }
       put "/articles/about", { article: valid_attributes }
+      e
       last_response.status.must_equal 422
       last_response.body.parse_json.wont_equal nil
     end

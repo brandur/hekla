@@ -6,6 +6,9 @@ require "minitest/autorun"
 require "turn/autorun"
 require "rr"
 
+database_url = "postgres://localhost/the-surf-test"
+DB = Sequel.connect(database_url)
+
 require_relative("../lib/hekla")
 require_relative("../hekla")
 
@@ -28,6 +31,10 @@ class CacheStub
 end
 
 class Hash
+  def slice(*args)
+    self.reject { |k, v| !args.include?(k) }
+  end
+
   def without(*args)
     self.reject { |k, v| args.include?(k) }
   end
@@ -37,13 +44,10 @@ class MiniTest::Spec
   include RR::Adapters::TestUnit
 
   before do
-    Article.delete_all
+    Article.delete
   end
 end
 
 def e
   p last_response.errors
 end
-
-database_url = "postgres://localhost/the-surf-test"
-ActiveRecord::Base.establish_connection(database_url)

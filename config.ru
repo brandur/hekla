@@ -9,6 +9,10 @@ $stdout.sync = true
 $: << "./lib"
 require "hekla"
 
+# keep database connection separate from test suites
+DB = Sequel.connect(Hekla::Config.database_url)
+DB.loggers << Logger.new($stdout)
+
 # Sinatra app
 require "./hekla"
 
@@ -21,10 +25,6 @@ configure do
 end
 Hekla::log :assets, path: settings.assets
 Hekla::log :views,  path: settings.views
-
-# keep database connection separate from test suites
-ActiveRecord::Base.logger = Logger.new($stdout)
-ActiveRecord::Base.establish_connection(Hekla::Config.database_url)
 
 Slim::Engine.set_default_options format: :html5, pretty: true
 

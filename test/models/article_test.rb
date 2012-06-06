@@ -27,7 +27,7 @@ describe Article do
     end
 
     it "validates uniqueness of :slug" do
-      Article.create!(valid_attributes)
+      Article.create(valid_attributes)
       Article.new(valid_attributes).valid?.must_equal false
     end
   end

@@ -4,10 +4,6 @@ helpers do
   include Hekla::Helpers
 end
 
-error ActiveRecord::RecordNotFound do
-  404
-end
-
 get "/" do
   Hekla.log :get_articles_index, pjax: pjax?
   cache do
@@ -53,10 +49,11 @@ post "/articles" do
   Hekla.log :create_article
   authorized!
   @article = Article.new(article_params)
-  if @article.save
+  begin
+    @article.save
     cache_clear
     [201, @article.to_json]
-  else
+  rescue Sequel::ValidationFailed
     [422, @article.errors.to_json]
   end
 end
@@ -65,10 +62,11 @@ put "/articles/:id" do |id|
   Hekla.log :update_article, id: id
   authorized!
   @article = Article.find_by_slug!(id)
-  if @article.update_attributes(article_params)
+  begin
+    @article.update(article_params)
     cache_clear
     204
-  else
+  rescue Sequel::ValidationFailed
     [422, @article.errors.to_json]
   end
 end

@@ -6,10 +6,10 @@ module Hekla
       else
         params[:article]
       end
-      attrs = metadata.delete_if { |k, v|
-        k.include?(:title, :slug, :summary, :content, :published_at)
-      }
-      attrs.merge({ metadata: metadata })
+      attrs, metadata = 
+        metadata.split(:title, :slug, :summary, :content, :published_at)
+      attrs.merge!({ metadata: metadata }) if metadata.count > 0
+      attrs
     end
 
     def authenticate_with_http_basic
@@ -58,7 +58,7 @@ module Hekla
       attrs = args.last.is_a?(Hash) ? args.pop : {}
       title = args[1] ? args[0] : nil
       uri   = args[1] ? args[1] : args[0]
-      uri = uri.to_path if uri.kind_of?(ActiveRecord::Base)
+      uri = uri.to_path if uri.kind_of?(Sequel::Model)
       attrs[:title] = title if title
       attr_str = attrs.map { |k, v| %{#{k}="#{v}"} }.join(" ")
       attr_str = " #{attr_str}" if attr_str.length > 0

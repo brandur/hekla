@@ -1,7 +1,13 @@
-class Article < ActiveRecord::Base
-  scope :ordered, order('published_at DESC')
-  validates_presence_of :title, :slug, :content, :published_at
-  validates_uniqueness_of :slug
+class Article < Sequel::Model
+  plugin :validation_helpers
+
+  def self.find_by_slug!(s)
+    filter(slug: s).first || raise(Sinatra::NotFound)
+  end
+
+  def self.ordered
+    reverse_order(:published_at)
+  end
 
   def content_html
     render_markdown(content)
@@ -11,8 +17,18 @@ class Article < ActiveRecord::Base
     render_markdown(summary)
   end
 
+  def to_json
+    values.to_json
+  end
+
   def to_path
     "/#{slug}"
+  end
+
+  def validate
+    super
+    validates_presence [:title, :slug, :content, :published_at]
+    validates_unique [:slug]
   end
 
   private

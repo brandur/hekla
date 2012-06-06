@@ -1,11 +1,10 @@
-require "active_record"
+require "bundler/setup"
 require "logger"
 require "rake/testtask"
+Bundler.require
 
 $: << "./lib"
 require "hekla"
-
-require_relative "models/article"
 
 Rake::TestTask.new do |t|
   t.libs.push "lib", "test"
@@ -14,8 +13,8 @@ Rake::TestTask.new do |t|
 end
 
 task :environment do
-  ActiveRecord::Base.logger = Logger.new($stdout)
-  ActiveRecord::Base.establish_connection(Hekla::Config.database_url)
+  DB = Sequel.connect(Hekla::Config.database_url)
+  DB.loggers << Logger.new($stdout)
 end
 
 task :lorem => :environment do

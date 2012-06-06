@@ -1,7 +1,6 @@
 source :rubygems
 
-gem "activerecord", require: ["active_record"]
-gem "activerecord-postgres-hstore", require: ["activerecord-postgres-hstore"]
+gem "builder"
 gem "coffee-script"
 gem "dalli"
 gem "kgio" # optional 20-30% performance boost for Dalli
@@ -11,6 +10,7 @@ gem "pg"
 gem "rack"
 gem "redcarpet"
 gem "sass"
+gem "sequel", require: ["sequel"]
 gem "sinatra"
 gem "slim"
 gem "sprockets"
