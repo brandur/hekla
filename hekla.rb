@@ -49,6 +49,11 @@ get "/articles/:id" do |id|
   redirect to("/#{id}")
 end
 
+get "/a/:id" do |id|
+  Hekla.log :get_article, pjax: pjax?, id: id, old_tinylink: true
+  redirect to("/archive")
+end
+
 post "/articles" do
   Hekla.log :create_article
   authorized!

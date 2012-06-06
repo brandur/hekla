@@ -118,6 +118,13 @@ describe Hekla do
     end
   end
 
+  describe "GET /a/:id" do
+    it "redirects to the archive" do
+      get "/a/7"
+      last_response.status.must_equal 302
+    end
+  end
+
   describe "POST /articles" do
     it "requires authorization" do
       post "/articles", { article: valid_attributes }
