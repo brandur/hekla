@@ -8,8 +8,8 @@ require "irb"
 $: << "./lib"
 require "hekla"
 
-require_relative "../models/article"
-
 DB = Sequel.connect(Hekla::Config.database_url)
+
+require_relative "../models/article"
 
 IRB.start
