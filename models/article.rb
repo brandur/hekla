@@ -18,7 +18,7 @@ class Article < Sequel::Model
   end
 
   def to_json
-    values.to_json
+    values.merge({published_at: published_at.iso8601}).to_json
   end
 
   def to_path
