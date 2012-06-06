@@ -180,7 +180,6 @@ describe Hekla do
         raise(Sequel::ValidationFailed.new([]))
       }
       put "/articles/about", { article: valid_attributes }
-      e
       last_response.status.must_equal 422
       last_response.body.parse_json.wont_equal nil
     end

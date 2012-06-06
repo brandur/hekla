@@ -4,6 +4,10 @@ helpers do
   include Hekla::Helpers
 end
 
+error Sequel::ValidationFailed do
+  [422, @article.errors.flatten.to_json]
+end
+
 get "/" do
   Hekla.log :get_articles_index, pjax: pjax?
   cache do
@@ -49,26 +53,18 @@ post "/articles" do
   Hekla.log :create_article
   authorized!
   @article = Article.new(article_params)
-  begin
-    @article.save
-    cache_clear
-    [201, @article.to_json]
-  rescue Sequel::ValidationFailed
-    [422, @article.errors.to_json]
-  end
+  @article.save
+  cache_clear
+  [201, @article.to_json]
 end
 
 put "/articles/:id" do |id|
   Hekla.log :update_article, id: id
   authorized!
   @article = Article.find_by_slug!(id)
-  begin
-    @article.update(article_params)
-    cache_clear
-    204
-  rescue Sequel::ValidationFailed
-    [422, @article.errors.to_json]
-  end
+  @article.update(article_params)
+  cache_clear
+  204
 end
 
 delete "/articles/:id" do |id|
