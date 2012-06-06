@@ -3,13 +3,6 @@ class Hash
     new_hash = select { |k, v| keys.include?(k) }
     return new_hash, delete_if { |k, v| keys.include?(k) }
   end
-
-  def symbolize_keys
-    inject({}) do |options, (key, value)|
-      options[(key.to_sym rescue key) || key] = value
-      options
-    end
-  end
 end
 
 class NilClass
