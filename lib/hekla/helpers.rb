@@ -8,7 +8,7 @@ module Hekla
       end
       attrs, metadata = 
         metadata.split(:title, :slug, :summary, :content, :published_at)
-      attrs.merge!({ metadata: metadata }) if metadata.count > 0
+      attrs.merge!({ metadata: metadata.hstore }) if metadata.count > 0
       attrs
     end
 

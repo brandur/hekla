@@ -22,7 +22,7 @@ describe Hekla::Helpers do
         summary:      "About the Surf.",
         content:      "About the Surf.",
         published_at: "today",
-        metadata:     { other: "random!" },
+        metadata:     { other: "random!" }.hstore,
       })
     end
   end
@@ -56,7 +56,7 @@ describe Hekla::Helpers do
         summary:      "About the Surf.",
         content:      "About the Surf.",
         published_at: "today",
-        metadata:     { other: "random!" },
+        metadata:     { other: "random!" }.hstore,
       })
     end
   end

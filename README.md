@@ -21,6 +21,7 @@ heroku create -s cedar the-surf
 export HTTP_API_KEY=$(ruby -e "require 'securerandom'; puts SecureRandom.hex(20)")
 heroku config:add THEME=the-surf HTTP_API_KEY=$HTTP_API_KEY
 git push heroku
+heroku run 'sequel -m db/migrate $DATABASE_URL'
 ```
 
 Upload an article using a template like [the-surf-content](https://github.com/brandur/the-surf-content):
@@ -40,6 +41,7 @@ Settings are pulled from `.env`:
 
 ``` bash
 bundle install
+sequel -m db/migrate $DATABASE_URL
 foreman start
 ```
 
@@ -49,5 +51,6 @@ Testing
 Run the test suite with:
 
 ``` bash
+sequel -m db/migrate "postgres://localhost/the-surf-test"
 bundle exec rake test
 ```

@@ -25,26 +25,6 @@ task :lorem => :environment do
   create_lorem_ipsum_article title: "Incididunt deleniti et molestiae exercitation ", slug: "incididunt"
 end
 
-namespace :db do
-  task :migrate => :environment do
-    ActiveRecord::Migration.verbose = true
-    if ENV["STEPS"]
-      ActiveRecord::Migrator.forward("db/migrate", ENV["STEPS"].to_i)
-    else
-      ActiveRecord::Migrator.migrate("db/migrate", ENV["VERSION"])
-    end
-  end
-
-  task :rollback => :environment do
-    ActiveRecord::Migration.verbose = true
-    if ENV["STEPS"]
-      ActiveRecord::Migrator.rollback("db/migrate", ENV["STEPS"].to_i)
-    else
-      ActiveRecord::Migrator.down("db/migrate", ENV["VERSION"])
-    end
-  end
-end
-
 def create_lorem_ipsum_article(attributes = {})
   content = Hekla::LoremIpsum.run
   attributes = 

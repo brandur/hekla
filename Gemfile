@@ -10,7 +10,7 @@ gem "pg"
 gem "rack"
 gem "redcarpet"
 gem "sass"
-gem "sequel", require: ["sequel"]
+gem "sequel", require: ["sequel", "sequel/extensions/pg_hstore"]
 gem "sinatra"
 gem "slim"
 gem "sprockets"
