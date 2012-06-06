@@ -27,7 +27,7 @@ end
 get "/archive" do
   Hekla.log :get_articles_archive, pjax: pjax?
   cache do
-    @articles = Article.ordered.group_by { |a| a.published_at.year }
+    @articles = Article.ordered.all.group_by { |a| a.published_at.year }
       .sort.reverse
     @title = "Archive"
     slim :archive, layout: !pjax?

@@ -56,6 +56,15 @@ describe Hekla do
     end
   end
 
+  describe "GET /archive" do
+    it "shows the archive" do
+      mock(Article).ordered.mock!.all { [article] }
+      get "/archive"
+      e
+      last_response.status.must_equal 200
+    end
+  end
+
   describe "GET /:id" do
     it "shows an article" do
       mock(Article).find_by_slug!("about") { article }
