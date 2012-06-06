@@ -1,4 +1,4 @@
 @todo
 =====
 
-* Move from ActiveRecord to Sequel
+* Syntax highlighting doesn't activate on PJax change
