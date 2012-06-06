@@ -1,3 +1,22 @@
+module Enumerable
+  def group_by
+    return to_enum :group_by unless block_given?
+    assoc = {}
+
+    each do |element|
+      key = yield(element)
+
+      if assoc.has_key?(key)
+        assoc[key] << element
+      else
+        assoc[key] = [element]
+      end
+    end
+
+    assoc
+  end
+end
+
 class Hash
   def split(*keys)
     new_hash = select { |k, v| keys.include?(k) }
