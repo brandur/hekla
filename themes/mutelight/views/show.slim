@@ -12,9 +12,9 @@ article
     p.meta
       | Posted on 
       strong= @article.published_at.strftime('%B %e, %Y')
-      - # @todo: either get location back, or lose it
-      /|  from 
-      /strong= @article.location
+      - if @article.metadata[:location]
+        |  from 
+        strong= @article.metadata[:location]
 h2 Newest Articles
 ul.article
   - Article.ordered.limit(3).where("id <> ?", @article.id).each do |article|
