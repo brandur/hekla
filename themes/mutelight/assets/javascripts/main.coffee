@@ -11,13 +11,3 @@ $(document).ready ->
 
 $(document).on 'pjax:end', ->
   initSyntax()
-
-expanded = false
-$('#header').live 'click', ->
-  if (!expanded)
-    $('#header,#radial').animate {
-      height: '+=215'
-    }, 'slow', 'easeOutBounce'
-    expanded = true
-  else
-    window.location = '/'

@@ -24,7 +24,9 @@ html
     #shift
       #wrapper
         header
-          #header onclick='javascript:void(0)'
+          #header
+            == link_to '/', "data-pjax" => "#content" do
+              span
             strong.hide
               == link_to 'Mutelight', '/', "data-pjax" => "#content"
         #content
