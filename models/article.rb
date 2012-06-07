@@ -14,7 +14,7 @@ class Article < Sequel::Model
   end
 
   def summary_html
-    render_markdown(summary)
+    summary ? render_markdown(summary) : nil
   end
 
   def to_json
