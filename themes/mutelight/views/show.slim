@@ -12,7 +12,7 @@ article
     p.meta
       | Posted on 
       strong= @article.published_at.strftime('%B %e, %Y')
-      - if @article.metadata[:location]
+      - if @article.metadata && @article.metadata[:location]
         |  from 
         strong= @article.metadata[:location]
 h2 Newest Articles

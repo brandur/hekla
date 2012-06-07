@@ -4,7 +4,7 @@
       h1= @article.title
       == @article.content_html
       p.extra
-        - if @article.metadata[:location]
+        - if @article.metadata && @article.metadata[:location]
           | Published #{@article.published_at.strftime("%B %d, %Y")} from #{@article.metadata[:location]}. 
         - else
           | Published #{@article.published_at.strftime("%B %d, %Y")}. 
