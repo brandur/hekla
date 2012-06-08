@@ -50,8 +50,10 @@ get "/articles/:id" do |id|
 end
 
 get "/a/:id" do |id|
-  Hekla.log :get_article, pjax: pjax?, id: id, old_tinylink: true
-  redirect to("/archive")
+  Hekla.log :get_article, pjax: pjax?, id: id, tiny_slug: true
+  @article = Article.first("metadata -> 'tiny_slug' = ?", id) ||
+    raise(Sinatra::NotFound)
+  redirect to(@article.to_path)
 end
 
 post "/articles" do
