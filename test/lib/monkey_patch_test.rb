@@ -12,9 +12,9 @@ describe Hash do
 end
 
 describe Time do
-  describe "#rfc822" do
-    it "produces RFC822 compliant times" do
-      Time.new.to_rfc822.wont_equal nil
+  describe "#rfc3339" do
+    it "produces RFC3339 compliant times" do
+      Time.new.rfc3339.wont_equal nil
     end
   end
 end

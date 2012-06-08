@@ -1,3 +1,5 @@
+require "time"
+
 module Enumerable
   def group_by
     return to_enum :group_by unless block_given?
@@ -47,7 +49,7 @@ class String
 end
 
 class Time
-  def to_rfc822
-    strftime("%a, %d %b %Y %H:%M:%S %z")
+  def rfc3339
+    DateTime.now(to_s).rfc3339
   end
 end
