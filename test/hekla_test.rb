@@ -119,9 +119,15 @@ describe Hekla do
   end
 
   describe "GET /a/:id" do
-    it "redirects to the archive" do
+    it "redirects to an article if there was a tiny slug" do
+      mock(Article).first.with_any_args { article }
       get "/a/7"
       last_response.status.must_equal 302
+    end
+
+    it "responds with 404 for a non-existent tiny slug" do
+      get "/a/8"
+      last_response.status.must_equal 404
     end
   end
 
