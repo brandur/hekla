@@ -50,6 +50,6 @@ end
 
 class Time
   def rfc3339
-    DateTime.now(to_s).rfc3339
+    DateTime.parse(to_s).rfc3339
   end
 end
