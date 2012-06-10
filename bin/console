@@ -13,7 +13,7 @@ DB = Sequel.connect(Hekla::Config.database_url)
 require_relative "../models/article"
 
 # Sinatra actually has a hook on `at_exit` that activates whenever it's
-# included. This setting will supress it.
+# included. This setting will suppress it.
 set :run, false
 
 IRB.start
