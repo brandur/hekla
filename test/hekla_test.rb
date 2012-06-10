@@ -69,7 +69,7 @@ describe Hekla do
       get "/robots.txt"
       last_response.status.must_equal 200
       last_response.body.include?("Disallow: /").must_equal true
-
+      last_response.headers["Content-Type"].must_equal "text/plain"
     end
 
     it "responds with a 404 in production" do
