@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
+require "irb"
+require "irb/completion"
 require "bundler/setup"
 Bundler.require
-
-require "irb"
 
 $: << "./lib"
 require "hekla"
@@ -11,5 +11,9 @@ require "hekla"
 DB = Sequel.connect(Hekla::Config.database_url)
 
 require_relative "../models/article"
+
+# Sinatra actually has a hook on `at_exit` that activates whenever it's
+# included. This setting will supress it.
+set :run, false
 
 IRB.start
