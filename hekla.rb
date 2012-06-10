@@ -42,7 +42,7 @@ get "/robots.txt" do
   Disallow: /
     eos
   else
-    404
+    raise(Sinatra::NotFound)
   end
 end
 
