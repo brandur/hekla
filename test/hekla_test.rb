@@ -65,17 +65,17 @@ describe Hekla do
   end
 
   describe "GET /robots.txt" do
+    it "responds with a 404" do
+      get "/robots.txt"
+      last_response.status.must_equal 404
+    end
+
     it "shows a robots file telling bots not to index the site" do
+      stub(Hekla::Config).disable_robots? { true }
       get "/robots.txt"
       last_response.status.must_equal 200
       last_response.body.include?("Disallow: /").must_equal true
       last_response.headers["Content-Type"].must_equal "text/plain"
-    end
-
-    it "responds with a 404 in production" do
-      stub(Hekla::Config).production? { true }
-      get "/robots.txt"
-      last_response.status.must_equal 404
     end
   end
 

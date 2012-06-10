@@ -10,12 +10,12 @@ module Hekla
       rack_env == "development"
     end
 
-    def http_api_key
-      @http_api_key ||= env!("HTTP_API_KEY")
+    def disable_robots?
+      @robots_disabled ||= !!env("DISABLE_ROBOTS")
     end
 
-    def production?
-      rack_env == "production"
+    def http_api_key
+      @http_api_key ||= env!("HTTP_API_KEY")
     end
 
     def theme

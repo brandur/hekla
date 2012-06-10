@@ -35,7 +35,7 @@ get "/archive" do
 end
 
 get "/robots.txt" do
-  unless Hekla::Config.production?
+  if Hekla::Config.disable_robots?
     [200, { 'Content-Type' => 'text/plain' }, <<-eos]
   # this is a staging environment. please index the main site instead.
   User-agent: *
