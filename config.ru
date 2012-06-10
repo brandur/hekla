@@ -29,8 +29,6 @@ Scrolls.log :views,  path: settings.views
 
 Slim::Engine.set_default_options format: :html5, pretty: true
 
-use Rack::Instruments
-
 map "/assets" do
   assets = Sprockets::Environment.new do |env|
     env.append_path(settings.assets + "/images")
@@ -42,5 +40,6 @@ map "/assets" do
 end
 
 map "/" do
+  use Rack::Instruments
   run Sinatra::Application
 end
