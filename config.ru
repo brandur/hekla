@@ -16,11 +16,11 @@ DB.loggers << Logger.new($stdout)
 # Sinatra app
 require "./hekla"
 
-require "sinatra/reloader" if Hekla.development?
+require "sinatra/reloader" if Hekla::Config.development?
 
 configure do
   set :assets,          settings.root + "/themes/#{Hekla::Config.theme}/assets"
-  set :cache,           Dalli::Client.new unless Hekla.development?
+  set :cache,           Dalli::Client.new unless Hekla::Config.development?
   set :show_exceptions, false
   set :views,           settings.root + "/themes/#{Hekla::Config.theme}/views"
 end

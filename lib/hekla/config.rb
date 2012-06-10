@@ -6,8 +6,16 @@ module Hekla
       @database_url ||= env!("DATABASE_URL")
     end
 
+    def development?
+      rack_env == "development"
+    end
+
     def http_api_key
       @http_api_key ||= env!("HTTP_API_KEY")
+    end
+
+    def production?
+      rack_env == "production"
     end
 
     def theme
@@ -22,6 +30,10 @@ module Hekla
 
     def env!(k)
       env(k) || raise("missing_environment=#{k}")
+    end
+
+    def rack_env
+      @rack_env ||= env("RACK_ENV")
     end
   end
 end

@@ -7,14 +7,6 @@ require "hekla/lorem_ipsum"
 
 module Hekla
   extend Log
-
-  def self.development?
-    env == "development"
-  end
-
-  def self.env
-    ENV["RACK_ENV"]
-  end
 end
 
 def d

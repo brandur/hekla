@@ -34,6 +34,18 @@ get "/archive" do
   end
 end
 
+get "/robots.txt" do
+  unless Hekla::Config.production?
+    [200, { 'Content-Type' => 'text/plain' }, <<-eos]
+  # this is a staging environment. please index the main site instead.
+  User-agent: *
+  Disallow: /
+    eos
+  else
+    404
+  end
+end
+
 get "/:id" do |id|
   Hekla.log :get_article, pjax: pjax?, id: id
   cache do

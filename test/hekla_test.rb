@@ -24,7 +24,7 @@ describe Hekla do
     stub(Hekla::Config).http_api_key { "KEY" }
 
     # so we can test fancy stuff like caching
-    stub(Hekla).development? { false }
+    stub(Hekla::Config).development? { false }
   end
 
   it "responds with a 404" do
@@ -60,8 +60,22 @@ describe Hekla do
     it "shows the archive" do
       mock(Article).ordered.mock!.all { [article] }
       get "/archive"
-      e
       last_response.status.must_equal 200
+    end
+  end
+
+  describe "GET /robots.txt" do
+    it "shows a robots file telling bots not to index the site" do
+      get "/robots.txt"
+      last_response.status.must_equal 200
+      last_response.body.include?("Disallow: /").must_equal true
+
+    end
+
+    it "responds with a 404 in production" do
+      stub(Hekla::Config).production? { true }
+      get "/robots.txt"
+      last_response.status.must_equal 404
     end
   end
 
@@ -143,6 +157,7 @@ describe Hekla do
       mock(article).save { true }
       mock(Article).new.with_any_args { article }
       post "/articles", { article: valid_attributes }
+      e
       last_response.status.must_equal 201
     end
 

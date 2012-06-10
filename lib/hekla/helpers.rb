@@ -32,7 +32,7 @@ module Hekla
     end
 
     def cache
-      if Hekla.development?
+      if Hekla::Config.development?
         yield
       else
         key = request.path_info
@@ -50,7 +50,7 @@ module Hekla
     end
 
     def cache_clear
-      settings.cache.flush unless Hekla.development?
+      settings.cache.flush unless Hekla::Config.development?
     end
 
     # @todo: OMG HOLY SHIT FUGLY
