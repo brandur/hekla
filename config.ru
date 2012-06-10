@@ -24,10 +24,12 @@ configure do
   set :show_exceptions, false
   set :views,           settings.root + "/themes/#{Hekla::Config.theme}/views"
 end
-Hekla::log :assets, path: settings.assets
-Hekla::log :views,  path: settings.views
+Scrolls.log :assets, path: settings.assets
+Scrolls.log :views,  path: settings.views
 
 Slim::Engine.set_default_options format: :html5, pretty: true
+
+use Rack::Instruments
 
 map "/assets" do
   assets = Sprockets::Environment.new do |env|

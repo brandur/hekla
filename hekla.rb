@@ -9,7 +9,7 @@ error Sequel::ValidationFailed do
 end
 
 get "/" do
-  Hekla.log :get_articles_index, pjax: pjax?
+  log :get_articles_index, pjax: pjax?
   cache do
     @articles = Article.ordered.limit(10)
     slim :index, layout: !pjax?
@@ -17,7 +17,7 @@ get "/" do
 end
 
 get "/articles.atom" do
-  Hekla.log :get_articles_index, pjax: pjax?, format: "atom"
+  log :get_articles_index, pjax: pjax?, format: "atom"
   cache do
     @articles = Article.ordered.limit(20)
     builder :articles
@@ -25,7 +25,7 @@ get "/articles.atom" do
 end
 
 get "/archive" do
-  Hekla.log :get_articles_archive, pjax: pjax?
+  log :get_articles_archive, pjax: pjax?
   cache do
     @articles = Article.ordered.all.group_by { |a| a.published_at.year }
       .sort.reverse
@@ -35,6 +35,7 @@ get "/archive" do
 end
 
 get "/robots.txt" do
+  log :get_robots, robots_disabled: Hekla::Config.disable_robots?
   if Hekla::Config.disable_robots?
     [200, { 'Content-Type' => 'text/plain' }, <<-eos]
   # this is a staging environment. please index the main site instead.
@@ -47,7 +48,7 @@ get "/robots.txt" do
 end
 
 get "/:id" do |id|
-  Hekla.log :get_article, pjax: pjax?, id: id
+  log :get_article, pjax: pjax?, id: id
   cache do
     @article = Article.find_by_slug!(id)
     @title = @article.title
@@ -57,19 +58,19 @@ end
 
 # redirect old style permalinks
 get "/articles/:id" do |id|
-  Hekla.log :get_article, pjax: pjax?, id: id, old_permalink: true
+  log :get_article, pjax: pjax?, id: id, old_permalink: true
   redirect to("/#{id}")
 end
 
 get "/a/:id" do |id|
-  Hekla.log :get_article, pjax: pjax?, id: id, tiny_slug: true
+  log :get_article, pjax: pjax?, id: id, tiny_slug: true
   @article = Article.first("metadata -> 'tiny_slug' = ?", id) ||
     raise(Sinatra::NotFound)
   redirect to(@article.to_path)
 end
 
 post "/articles" do
-  Hekla.log :create_article
+  log :create_article
   authorized!
   @article = Article.new(article_params)
   @article.save
@@ -78,7 +79,7 @@ post "/articles" do
 end
 
 put "/articles/:id" do |id|
-  Hekla.log :update_article, id: id
+  log :update_article, id: id
   authorized!
   @article = Article.find_by_slug!(id)
   @article.update(article_params)
@@ -87,7 +88,7 @@ put "/articles/:id" do |id|
 end
 
 delete "/articles/:id" do |id|
-  Hekla.log :destroy_article, id: id
+  log :destroy_article, id: id
   authorized!
   @article = Article.find_by_slug!(id)
   @article.destroy

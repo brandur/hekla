@@ -26,7 +26,7 @@ module Hekla
 
     def authorized!
       unless authorized?
-        Hekla.log :unauthorized, ip: request.ip
+        log :unauthorized
         throw(:halt, [401, { message: "Not authorized" }.to_json])
       end
     end
@@ -38,10 +38,10 @@ module Hekla
         key = request.path_info
         key += "__pjax" if pjax?
         if cached = settings.cache.get(key)
-          Hekla.log :cache_hit, path_info: request.path_info, key: key
+          Scrolls.log :cache_hit, path_info: request.path_info, key: key
           cached
         else
-          Hekla.log :cache_miss, key: key
+          Scrolls.log :cache_miss, key: key
           cached = yield
           settings.cache.set(key, cached)
           cached
@@ -63,6 +63,10 @@ module Hekla
       attr_str = attrs.map { |k, v| %{#{k}="#{v}"} }.join(" ")
       attr_str = " #{attr_str}" if attr_str.length > 0
       %{<a href="#{uri}" #{attr_str}>#{block_given? ? yield : title}</a>}
+    end
+
+    def log(action, attrs = {})
+      Scrolls.log(action, attrs.merge!(id: request.id))
     end
 
     def pjax?
