@@ -80,9 +80,15 @@ describe Hekla do
   end
 
   describe "GET /:id.:format" do
-    it "shows an article if a format was specified" do
+    it "redirects to an article if a format was specified" do
+      mock(Article).find_by_slug("about") { article }
       get "/about.html"
       last_response.status.must_equal 302
+    end
+
+    it "responds with a 404 if that article did not exist" do
+      get "/about.html"
+      last_response.status.must_equal 404
     end
   end
 
@@ -135,8 +141,14 @@ describe Hekla do
 
   describe "GET /articles/:id" do
     it "redirects to /:id" do
+      mock(Article).find_by_slug("about") { article }
       get "/articles/about"
       last_response.status.must_equal 302
+    end
+
+    it "responds with 404 if the article did not exist" do
+      get "/articles/about"
+      last_response.status.must_equal 404
     end
   end
 

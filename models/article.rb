@@ -1,8 +1,12 @@
 class Article < Sequel::Model
   plugin :validation_helpers
 
+  def self.find_by_slug(s)
+    filter(slug: s).first
+  end
+
   def self.find_by_slug!(s)
-    filter(slug: s).first || raise(Sinatra::NotFound)
+    find_by_slug(s) || raise(Sinatra::NotFound)
   end
 
   def self.ordered

@@ -49,7 +49,11 @@ end
 
 get "/:id.:format" do |id, format|
   log :get_article, pjax: pjax?, id: id, format: true
-  redirect to("/#{id}")
+  if Article.find_by_slug(id)
+    redirect to("/#{id}")
+  else
+    404
+  end
 end
 
 get "/:id" do |id|
@@ -64,7 +68,11 @@ end
 # redirect old style permalinks
 get "/articles/:id" do |id|
   log :get_article, pjax: pjax?, id: id, old_permalink: true
-  redirect to("/#{id}")
+  if Article.find_by_slug(id)
+    redirect to("/#{id}")
+  else
+    404
+  end
 end
 
 get "/a/:id" do |id|
