@@ -79,6 +79,13 @@ describe Hekla do
     end
   end
 
+  describe "GET /:id.:format" do
+    it "shows an article if a format was specified" do
+      get "/about.html"
+      last_response.status.must_equal 302
+    end
+  end
+
   describe "GET /:id" do
     it "shows an article" do
       mock(Article).find_by_slug!("about") { article }
@@ -120,6 +127,7 @@ describe Hekla do
     it "shows a cached article without layout" do
       cache.set("/about__pjax", "About the Surf.")
       get "/about", {}, "X-PJAX" => true
+      e
       last_response.status.must_equal 200
       last_response.body.must_equal "About the Surf."
     end

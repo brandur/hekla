@@ -47,6 +47,11 @@ get "/robots.txt" do
   end
 end
 
+get "/:id.:format" do |id, format|
+  log :get_article, pjax: pjax?, id: id, format: true
+  redirect to("/#{id}")
+end
+
 get "/:id" do |id|
   log :get_article, pjax: pjax?, id: id
   cache do
