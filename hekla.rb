@@ -52,7 +52,7 @@ get "/:id.:format" do |id, format|
   if Article.find_by_slug(id)
     redirect to("/#{id}")
   else
-    404
+    raise(Sinatra::NotFound)
   end
 end
 
@@ -71,7 +71,7 @@ get "/articles/:id" do |id|
   if Article.find_by_slug(id)
     redirect to("/#{id}")
   else
-    404
+    raise(Sinatra::NotFound)
   end
 end
 
