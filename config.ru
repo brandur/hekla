@@ -24,8 +24,8 @@ configure do
   set :show_exceptions, false
   set :views,           settings.root + "/themes/#{Hekla::Config.theme}/views"
 end
-Scrolls.log :assets, path: settings.assets
-Scrolls.log :views,  path: settings.views
+Slides.log :assets, path: settings.assets
+Slides.log :views,  path: settings.views
 
 Slim::Engine.set_default_options format: :html5, pretty: true
 

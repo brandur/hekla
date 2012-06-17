@@ -38,10 +38,10 @@ module Hekla
         key = request.path_info
         key += "__pjax" if pjax?
         if cached = settings.cache.get(key)
-          Scrolls.log :cache_hit, path_info: request.path_info, key: key
+          Slides.log :cache_hit, path_info: request.path_info, key: key
           cached
         else
-          Scrolls.log :cache_miss, key: key
+          Slides.log :cache_miss, key: key
           cached = yield
           settings.cache.set(key, cached)
           cached
@@ -66,7 +66,7 @@ module Hekla
     end
 
     def log(action, attrs = {})
-      Scrolls.log(action, attrs.merge!(id: request.id))
+      Slides.log(action, attrs.merge!(id: request.id))
     end
 
     def pjax?

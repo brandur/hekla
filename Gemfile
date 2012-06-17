@@ -11,7 +11,7 @@ gem "rack"
 gem "rack-instruments"
 gem "redcarpet"
 gem "sass"
-gem "scrolls-minimal", require: "scrolls"
+gem "slides"
 gem "sequel", require: ["sequel", "sequel/extensions/pg_hstore"]
 gem "sinatra"
 gem "slim"
