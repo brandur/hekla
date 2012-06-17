@@ -9,7 +9,7 @@ Sequel.migration do
       DateTime :published_at, null: false
     end
 
-    run "CREATE EXTENSION hstore"
+    run "CREATE EXTENSION IF NOT EXISTS hstore"
     run "ALTER TABLE articles ADD COLUMN metadata hstore"
   end
 
