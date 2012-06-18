@@ -32,7 +32,7 @@ GEM
     oj (1.2.9)
     pg (0.13.2)
     rack (1.4.1)
-    rack-instruments (0.1.6)
+    rack-instruments (0.1.7)
       slides (~> 0.1)
     rack-protection (1.2.0)
       rack
