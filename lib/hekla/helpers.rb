@@ -38,10 +38,10 @@ module Hekla
         key = request.path_info
         key += "__pjax" if pjax?
         if cached = settings.cache.get(key)
-          Slides.log :cache_hit, path_info: request.path_info, key: key
+          log :cache_hit, path_info: request.path_info, key: key
           cached
         else
-          Slides.log :cache_miss, key: key
+          log :cache_miss, key: key
           cached = yield
           settings.cache.set(key, cached)
           cached
