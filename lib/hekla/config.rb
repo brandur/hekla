@@ -11,7 +11,11 @@ module Hekla
     end
 
     def disable_robots?
-      @robots_disabled ||= !!env("DISABLE_ROBOTS")
+      @robots_disabled ||= %w{1 true}.include?(env("DISABLE_ROBOTS"))
+    end
+
+    def force_ssl?
+      @force_ssl ||= %w{1 true}.include?(env("FORCE_SSL"))
     end
 
     def http_api_key
