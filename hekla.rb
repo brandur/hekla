@@ -34,19 +34,6 @@ get "/archive" do
   end
 end
 
-get "/robots.txt" do
-  log :get_robots, robots_disabled: Hekla::Config.disable_robots?
-  if Hekla::Config.disable_robots?
-    [200, { 'Content-Type' => 'text/plain' }, <<-eos]
-  # this is a staging environment. please index the main site instead.
-  User-agent: *
-  Disallow: /
-    eos
-  else
-    raise(Sinatra::NotFound)
-  end
-end
-
 get "/:id.:format" do |id, format|
   log :get_article, pjax: pjax?, id: id, format: true
   redirect to("/#{id}") if Article.find_by_slug(id)

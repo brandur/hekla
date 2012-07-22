@@ -64,21 +64,6 @@ describe Hekla do
     end
   end
 
-  describe "GET /robots.txt" do
-    it "responds with a 404" do
-      get "/robots.txt"
-      last_response.status.must_equal 404
-    end
-
-    it "shows a robots file telling bots not to index the site" do
-      stub(Hekla::Config).disable_robots? { true }
-      get "/robots.txt"
-      last_response.status.must_equal 200
-      last_response.body.include?("Disallow: /").must_equal true
-      last_response.headers["Content-Type"].must_equal "text/plain"
-    end
-  end
-
   describe "GET /:id.:format" do
     it "redirects to an article if a format was specified" do
       mock(Article).find_by_slug("about") { article }
