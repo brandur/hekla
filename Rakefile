@@ -15,6 +15,8 @@ end
 task :environment do
   DB = Sequel.connect(Hekla::Config.database_url)
   DB.loggers << Logger.new($stdout)
+
+  require_relative "models/article"
 end
 
 task :lorem => :environment do
@@ -31,5 +33,5 @@ def create_lorem_ipsum_article(attributes = {})
     { summary: content[0..160],
       content: content,
       published_at: Time.now }.merge!(attributes)
-  Article.create!(attributes)
+  Article.create(attributes)
 end
