@@ -406,6 +406,7 @@ if ( typeof window.console.emulated === 'undefined' ) {
 				
 				// Append
 				if ( !SyntaxHighlighter.loaded() ) {
+                    /*
 					$.appendScript(prettifyBaseUrl+'/prettify.min.js');
 					$.appendStylesheet(prettifyBaseUrl+'/prettify.min.css');
 					$.appendStylesheet(baseUrl+'/styles/style.min.css');
@@ -415,6 +416,7 @@ if ( typeof window.console.emulated === 'undefined' ) {
 					if ( $.browser.msie ) {
 						$.appendStylesheet(baseUrl+'/styles/ie.min.css');
 					}
+                    */
 					SyntaxHighlighter.loadedExtras = true;
 				}
 				
