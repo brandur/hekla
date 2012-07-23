@@ -3,8 +3,8 @@ xml.feed "xml:lang" => "en-US", :xmlns => "http://www.w3.org/2005/Atom" do
   xml.title "The Surf"
   xml.id "tag:the-surf.org,2012:/articles"
   xml.updated @articles.first ? @articles.first.published_at.rfc3339 : nil
-  xml.link rel: "alternate", type: "text/html", href: "http://the-surf.org"
-  xml.link rel: "self", type: "application/atom+xml", href: "http://the-surf.org/articles.atom"
+  xml.link rel: "alternate", type: "text/html", href: "https://the-surf.org"
+  xml.link rel: "self", type: "application/atom+xml", href: "https://the-surf.org/articles.atom"
 
   for article in @articles
     xml.entry do

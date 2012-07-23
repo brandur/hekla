@@ -3,8 +3,8 @@ xml.feed "xml:lang" => "en-US", :xmlns => "http://www.w3.org/2005/Atom" do
   xml.title "Mutelight"
   xml.id "tag:mutelight.org,2009:/articles"
   xml.updated @articles.first ? @articles.first.published_at.rfc3339 : nil
-  xml.link rel: "alternate", type: "text/html", href: "http://mutelight.org"
-  xml.link rel: "self", type: "application/atom+xml", href: "http://mutelight.org/articles.atom"
+  xml.link rel: "alternate", type: "text/html", href: "https://mutelight.org"
+  xml.link rel: "self", type: "application/atom+xml", href: "https://mutelight.org/articles.atom"
 
   for article in @articles
     xml.entry do
