@@ -12,7 +12,7 @@ xml.feed "xml:lang" => "en-US", :xmlns => "http://www.w3.org/2005/Atom" do
       xml.content article.content_html, type: "html"
       xml.published article.published_at.rfc3339
       xml.updated article.published_at.rfc3339
-      xml.link href: "http://mutelight.org#{article.to_path}"
+      xml.link href: "https://mutelight.org#{article.to_path}"
       xml.id "tag:mutelight.org,#{article.published_at.strftime('%F')}:#{article.to_path}"
       xml.author do
         xml.name "Brandur Leach"
