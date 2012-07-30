@@ -1,10 +1,10 @@
-- if Article.count > 1
+- if @other_articles.count > 0
   #other_articles
     .row
       .col_12.last
         h2 Other Articles
         ul
-          - Article.ordered.limit(3).where("id <> ?", @article.id).each do |article|
+          - @other_articles.each do |article|
             li
               p== link_to article.title, article, "data-pjax" => "#content"
               .summary

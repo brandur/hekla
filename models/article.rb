@@ -17,6 +17,14 @@ class Article < Sequel::Model
     render_markdown(content)
   end
 
+  def next
+    Article.ordered.where("published_at > ?", published_at).last
+  end
+
+  def prev
+    Article.ordered.where("published_at < ?", published_at).first
+  end
+
   def summary_html
     summary ? render_markdown(summary) : nil
   end

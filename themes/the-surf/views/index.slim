@@ -2,6 +2,12 @@
   title The Surf
 - if @articles.first
   - @article = @articles.first
+  - @prev_article, @next_article = @article.prev, @article.next
+  - @other_articles = Article.ordered.limit(3).where("id NOT IN ?",[ \
+      @article.id, \
+      @prev_article ? @prev_article.id : nil, \
+      @next_article ? @next_article.id : nil \
+    ].compact)
   == render :slim, :"_article", layout: false
   == render :slim, :"_siblings", layout: false
   == render :slim, :"_other_articles", layout: false
