@@ -15,6 +15,7 @@ gem "redcarpet"
 gem "sass"
 gem "slides"
 gem "sequel", require: ["sequel", "sequel/extensions/pg_hstore"]
+gem "sequel-instruments"
 gem "sinatra"
 gem "slim"
 gem "sprockets"

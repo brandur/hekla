@@ -14,8 +14,6 @@ end
 
 task :environment do
   DB = Sequel.connect(Hekla::Config.database_url)
-  DB.loggers << Logger.new($stdout)
-
   require_relative "models/article"
 end
 

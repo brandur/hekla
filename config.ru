@@ -11,7 +11,6 @@ require "hekla"
 
 # keep database connection separate from test suites
 DB = Sequel.connect(Hekla::Config.database_url)
-DB.loggers << Logger.new($stdout)
 
 # Sinatra app
 require "./hekla"
