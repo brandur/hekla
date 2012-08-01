@@ -24,6 +24,13 @@ class Hash
     new_hash = select { |k, v| keys.include?(k) }
     return new_hash, delete_if { |k, v| keys.include?(k) }
   end
+
+  def symbolize_keys!
+    keys.each do |key|
+      self[(key.to_sym rescue key) || key] = delete(key)
+    end
+    self
+  end
 end
 
 class NilClass

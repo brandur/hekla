@@ -12,7 +12,7 @@ describe Hekla::Helpers do
         content:      "About the Surf.",
         published_at: "today",
         other:        "random!",
-      } }
+      }.to_json }
     end
 
     it "receives a standard article hash" do

@@ -48,6 +48,15 @@ class MiniTest::Spec
   end
 end
 
+# disable Sequel logging in tests because it's extremely verbose
+module ::Sequel
+  class Database
+    def log_yield(sql, args=nil)
+      yield
+    end
+  end
+end
+
 def e
   p last_response.errors
 end
