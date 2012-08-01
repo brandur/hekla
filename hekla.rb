@@ -4,6 +4,10 @@ helpers do
   include Hekla::Helpers
 end
 
+#
+# Error handling
+#
+
 error Sequel::ValidationFailed do
   [422, @article.errors.flatten.to_json]
 end
@@ -14,6 +18,10 @@ error do
     backtrace: env['sinatra.error'].backtrace
   [500, { message: "Internal server error" }.to_json]
 end
+
+#
+# Public
+#
 
 get "/" do
   log :get_articles_index, pjax: pjax?
@@ -69,6 +77,10 @@ get "/a/:id" do |id|
     raise(Sinatra::NotFound)
   redirect to(@article.to_path)
 end
+
+#
+# API
+#
 
 post "/articles" do
   log :create_article
