@@ -8,6 +8,13 @@ error Sequel::ValidationFailed do
   [422, @article.errors.flatten.to_json]
 end
 
+error do
+  log :error, type: env['sinatra.error'].class.name,
+    message: env['sinatra.error'].message,
+    backtrace: env['sinatra.error'].backtrace
+  [500, { message: "Internal server error" }.to_json]
+end
+
 get "/" do
   log :get_articles_index, pjax: pjax?
   cache do
