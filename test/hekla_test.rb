@@ -195,7 +195,7 @@ describe Hekla do
     it "updates an article" do
       authorize "", "KEY"
       put "/articles/about", { article: valid_attributes.to_json }
-      last_response.status.must_equal 204
+      last_response.status.must_equal 200
     end
 
     it "updates an article with file push" do
@@ -205,7 +205,7 @@ describe Hekla do
         attributes: valid_attributes.slice(:title, :summary).
           merge(published_at: time_str).to_s,
         content: valid_attributes[:content] }
-      last_response.status.must_equal 204
+      last_response.status.must_equal 200
     end
 
     it "fails to update an article" do
@@ -232,7 +232,7 @@ describe Hekla do
     it "deletes an article" do
       authorize "", "KEY"
       delete "/articles/about"
-      last_response.status.must_equal 204
+      last_response.status.must_equal 200
     end
   end
 end

@@ -85,7 +85,7 @@ put "/articles/:id" do |id|
   @article = Article.find_by_slug!(id)
   @article.update(article_params)
   cache_clear
-  204
+  [200, @article.to_json]
 end
 
 delete "/articles/:id" do |id|
@@ -94,5 +94,5 @@ delete "/articles/:id" do |id|
   @article = Article.find_by_slug!(id)
   @article.destroy
   cache_clear
-  204
+  [200, @article.to_json]
 end
