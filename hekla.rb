@@ -5,6 +5,14 @@ helpers do
 end
 
 #
+# Filters
+#
+
+before do
+  log :request_info, pjax: pjax?
+end
+
+#
 # Error handling
 #
 
@@ -24,7 +32,6 @@ end
 #
 
 get "/" do
-  log :get_articles_index, pjax: pjax?
   cache do
     @articles = Article.ordered.limit(10)
     slim :index, layout: !pjax?
@@ -32,7 +39,6 @@ get "/" do
 end
 
 get "/articles.atom" do
-  log :get_articles_index, pjax: pjax?, format: "atom"
   cache do
     @articles = Article.ordered.limit(20)
     builder :articles
@@ -40,7 +46,6 @@ get "/articles.atom" do
 end
 
 get "/archive" do
-  log :get_articles_archive, pjax: pjax?
   cache do
     @articles = Article.ordered.all.group_by { |a| a.published_at.year }
       .sort.reverse
@@ -50,13 +55,11 @@ get "/archive" do
 end
 
 get "/:id.:format" do |id, format|
-  log :get_article, pjax: pjax?, id: id, format: true
   redirect to("/#{id}") if Article.find_by_slug(id)
   raise(Sinatra::NotFound)
 end
 
 get "/:id" do |id|
-  log :get_article, pjax: pjax?, id: id
   cache do
     @article = Article.find_by_slug!(id)
     @title = @article.title
@@ -66,13 +69,13 @@ end
 
 # redirect old style permalinks
 get "/articles/:id" do |id|
-  log :get_article, pjax: pjax?, id: id, old_permalink: true
+  log :get_article, old_permalink: true
   redirect to("/#{id}") if Article.find_by_slug(id)
   raise(Sinatra::NotFound)
 end
 
 get "/a/:id" do |id|
-  log :get_article, pjax: pjax?, id: id, tiny_slug: true
+  log :get_article, tiny_slug: true
   @article = Article.first("metadata -> 'tiny_slug' = ?", id) ||
     raise(Sinatra::NotFound)
   redirect to(@article.to_path)
@@ -83,7 +86,6 @@ end
 #
 
 post "/articles" do
-  log :create_article
   authorized!
   @article = Article.new(article_params)
   @article.save
@@ -92,7 +94,6 @@ post "/articles" do
 end
 
 put "/articles/:id" do |id|
-  log :update_article, id: id
   authorized!
   @article = Article.find_by_slug!(id)
   @article.update(article_params)
@@ -101,7 +102,6 @@ put "/articles/:id" do |id|
 end
 
 delete "/articles/:id" do |id|
-  log :destroy_article, id: id
   authorized!
   @article = Article.find_by_slug!(id)
   @article.destroy
