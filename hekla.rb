@@ -90,7 +90,7 @@ post "/articles" do
   @article = Article.new(article_params)
   @article.save
   cache_clear
-  [201, @article.to_json]
+  [201, @article.to_json(pretty: curl?)]
 end
 
 put "/articles/:id" do |id|
@@ -98,7 +98,7 @@ put "/articles/:id" do |id|
   @article = Article.find_by_slug!(id)
   @article.update(article_params)
   cache_clear
-  [200, @article.to_json]
+  [200, @article.to_json(pretty: curl?)]
 end
 
 delete "/articles/:id" do |id|
@@ -106,5 +106,5 @@ delete "/articles/:id" do |id|
   @article = Article.find_by_slug!(id)
   @article.destroy
   cache_clear
-  [200, @article.to_json]
+  [200, @article.to_json(pretty: curl?)]
 end

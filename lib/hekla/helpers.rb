@@ -54,6 +54,10 @@ module Hekla
       settings.cache.flush unless Hekla::Config.development?
     end
 
+    def curl?
+      !!(request.user_agent =~ /curl/)
+    end
+
     # @todo: OMG HOLY SHIT FUGLY
     def link_to(*args)
       attrs = args.last.is_a?(Hash) ? args.pop : {}

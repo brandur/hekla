@@ -40,8 +40,8 @@ class NilClass
 end
 
 class Object
-  def to_json
-    MultiJson.dump(self)
+  def to_json(opts = {})
+    MultiJson.dump(self, opts)
   end
 end
 

@@ -29,8 +29,8 @@ class Article < Sequel::Model
     summary ? render_markdown(summary) : nil
   end
 
-  def to_json
-    values.merge({published_at: published_at.iso8601}).to_json
+  def to_json(opts = {})
+    values.merge({published_at: published_at.iso8601}).to_json(opts)
   end
 
   def to_path
