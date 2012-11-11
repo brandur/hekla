@@ -1,0 +1,32 @@
+doctype 5
+
+html lang='en'
+  head
+    title= @title ? @title : "Heroku API Development Blog"
+
+    meta content='text/html; charset=utf-8' http-equiv='Content-Type'
+
+    link href='/articles.atom' rel='alternate' title="Heroku API Development Blog" type='application/atom+xml'
+
+    link href="/assets/app.css" media="screen" rel="stylesheet" type="text/css"
+    script src="/assets/app.js" type="text/javascript"
+
+    / Enable HTML5 styling for the bane of the Internet
+    /[ if lt IE 9 ]
+      script src="//html5shim.googlecode.com/svn/trunk/html5.js"
+
+    == render :slim, :"_analytics", layout: false
+
+  body
+    #wrapper
+      .row
+        .col_12.last
+          header
+            #title
+              == link_to "/", "data-pjax" => "#content" do
+                strong Heroku
+                | API Development Blog
+      #content
+        == yield
+      nav
+      footer

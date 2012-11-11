@@ -1,0 +1,5 @@
+- if pjax?
+  title Heroku API Development Blog
+- @articles.each do |article|
+  - @article = article
+  == render :slim, :"_article", layout: false
