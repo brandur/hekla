@@ -4,6 +4,8 @@ module Hekla::Modules
       set :root, File.expand_path("../../../../", __FILE__)
       set :assets, (Sprockets::Environment.new { |env|
         path = settings.root + "/themes/#{Hekla::Config.theme}/assets"
+        Slides.log :assets, path: path
+
         env.append_path(path + "/images")
         env.append_path(path + "/javascripts")
         env.append_path(path + "/stylesheets")
@@ -13,7 +15,6 @@ module Hekla::Modules
           env.css_compressor = YUI::CssCompressor.new
         end
       })
-      Slides.log :assets, path: settings.assets
     end
 
     get "/assets/app.js" do
