@@ -13,7 +13,6 @@ GEM
       execjs
     coffee-script-source (1.3.3)
     columnize (0.3.6)
-    daemons (1.1.8)
     dalli (2.0.5)
     debugger (1.1.4)
       columnize (>= 0.3.1)
@@ -31,6 +30,8 @@ GEM
     oj (1.2.9)
     open4 (1.3.0)
     pg (0.13.2)
+    puma (1.6.3)
+      rack (~> 1.2)
     rack (1.4.1)
     rack-instruments (0.1.10)
       slides (~> 0.1.9)
@@ -69,10 +70,6 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     temple (0.4.0)
-    thin (1.3.1)
-      daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
-      rack (>= 1.0.0)
     tilt (1.3.3)
     turn (0.9.5)
       ansi
@@ -94,6 +91,7 @@ DEPENDENCIES
   multi_json
   oj
   pg
+  puma
   rack
   rack-instruments
   rack-robots
@@ -110,7 +108,6 @@ DEPENDENCIES
   slides
   slim
   sprockets
-  thin
   turn
   uglifier
   yui-compressor
