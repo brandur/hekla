@@ -45,12 +45,6 @@ class Object
   end
 end
 
-class Sinatra::Request
-  def id
-    env["REQUEST_ID"]
-  end
-end
-
 class String
   def blank?
     respond_to?(:empty?) ? empty? : !self

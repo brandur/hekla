@@ -75,7 +75,8 @@ module Hekla
     end
 
     def log(action, attrs = {})
-      Slides.log(action, attrs.merge!(id: request.id))
+      # REQUEST_ID inserted by rack-instruments
+      Slides.log(action, attrs.merge!(id: request.env["REQUEST_ID"]))
     end
 
     def pjax?
