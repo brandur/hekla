@@ -3,8 +3,8 @@ module Hekla::Modules
     include Hekla::Helpers
 
     configure do
-      set :show_exceptions, false
       set :root,            File.expand_path("../../../../", __FILE__)
+      set :show_exceptions, false
       set :views,           settings.root + "/themes/#{Hekla::Config.theme}/views"
       Slides.log :views, path: settings.views
     end

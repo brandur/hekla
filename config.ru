@@ -4,7 +4,6 @@ Bundler.require
 # so logging output appears properly
 $stdout.sync = true
 
-# keep database connection separate from test suites
 DB = Sequel.connect(ENV["DATABASE_URL"] ||
   raise("missing_environment=DATABASE_URL"))
 
