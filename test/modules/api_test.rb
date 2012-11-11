@@ -25,7 +25,7 @@ describe Hekla::Modules::API do
     it "requires authorization" do
       post "/articles", { article: valid_attributes.to_json }
       last_response.status.must_equal 401
-      last_response.body.parse_json["message"].must_equal "Not authorized"
+      last_json["message"].must_equal "Not authorized"
     end
 
     it "creates an article" do
@@ -50,7 +50,7 @@ describe Hekla::Modules::API do
       mock(Article).new.with_any_args { article }
       post "/articles", { article: valid_attributes.to_json }
       last_response.status.must_equal 422
-      last_response.body.parse_json.wont_equal nil
+      last_json.wont_equal nil
     end
   end
 
@@ -60,7 +60,7 @@ describe Hekla::Modules::API do
     it "requires authorization" do
       put "/articles/about", { article: valid_attributes.to_json }
       last_response.status.must_equal 401
-      last_response.body.parse_json["message"].must_equal "Not authorized"
+      last_json["message"].must_equal "Not authorized"
     end
 
     it "updates an article" do
@@ -87,7 +87,7 @@ describe Hekla::Modules::API do
       }
       put "/articles/about", { article: valid_attributes.to_json }
       last_response.status.must_equal 422
-      last_response.body.parse_json.wont_equal nil
+      last_json.wont_equal nil
     end
   end
 
@@ -97,7 +97,7 @@ describe Hekla::Modules::API do
     it "requires authorization" do
       delete "/articles/about"
       last_response.status.must_equal 401
-      last_response.body.parse_json["message"].must_equal "Not authorized"
+      last_json["message"].must_equal "Not authorized"
     end
 
     it "deletes an article" do
@@ -105,5 +105,11 @@ describe Hekla::Modules::API do
       delete "/articles/about"
       last_response.status.must_equal 200
     end
+  end
+
+  private
+
+  def last_json
+    MultiJson.decode(last_response.body)
   end
 end

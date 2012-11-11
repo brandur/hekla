@@ -49,10 +49,6 @@ class String
   def blank?
     respond_to?(:empty?) ? empty? : !self
   end
-
-  def parse_json
-    MultiJson.load(self)
-  end
 end
 
 class Time

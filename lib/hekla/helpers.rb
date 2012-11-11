@@ -4,7 +4,7 @@ module Hekla
       metadata = if params[:attributes] && params[:content]
         eval(params[:attributes]).merge!({ content: params[:content] })
       else
-        params[:article].parse_json
+        MultiJson.decode(params[:article])
       end
       metadata.symbolize_keys!
       attrs, metadata =
