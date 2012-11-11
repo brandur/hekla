@@ -21,10 +21,6 @@ module Hekla::Modules
     # Error handling
     #
 
-    error Sequel::ValidationFailed do
-      [422, @article.errors.flatten.to_json]
-    end
-
     error do
       log :error, type: env['sinatra.error'].class.name,
         message: env['sinatra.error'].message,
