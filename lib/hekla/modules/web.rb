@@ -24,10 +24,8 @@ module Hekla::Modules
     #
 
     error do
-      log :error, type: env['sinatra.error'].class.name,
-        message: env['sinatra.error'].message,
-        backtrace: env['sinatra.error'].backtrace
-      [500, "Internal server error"]
+      log_error(env['sinatra.error'])
+      [500, "<h1>Internal server error</h1>"]
     end
 
     #

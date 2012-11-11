@@ -12,5 +12,10 @@ module Hekla::Helpers
       # REQUEST_ID inserted by rack-instruments
       Slides.log(action, attrs.merge!(id: request.env["REQUEST_ID"]))
     end
+
+    def log_error(e)
+      log :error, type: e.class.name, message: e.message,
+        backtrace: e.backtrace
+    end
   end
 end
