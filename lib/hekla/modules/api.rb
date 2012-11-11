@@ -17,6 +17,10 @@ module Hekla::Modules
       [422, encode_json(@article.errors.flatten)]
     end
 
+    error Sinatra::NotFound do
+      [404, encode_json({ message: "Not found" })]
+    end
+
     error do
       log :error, type: env['sinatra.error'].class.name,
         message: env['sinatra.error'].message,
@@ -33,7 +37,7 @@ module Hekla::Modules
       @article = Article.new(article_params)
       @article.save
       cache_clear
-      [201, encode_json(@article)]
+      [201, encode_json(@article.v1_attributes)]
     end
 
     put "/articles/:id" do |id|
@@ -41,7 +45,7 @@ module Hekla::Modules
       @article = Article.find_by_slug!(id)
       @article.update(article_params)
       cache_clear
-      [200, encode_json(@article)]
+      [200, encode_json(@article.v1_attributes)]
     end
 
     delete "/articles/:id" do |id|
@@ -49,7 +53,7 @@ module Hekla::Modules
       @article = Article.find_by_slug!(id)
       @article.destroy
       cache_clear
-      [200, encode_json(@article)]
+      [200, encode_json(@article.v1_attributes)]
     end
   end
 end

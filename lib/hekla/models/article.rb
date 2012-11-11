@@ -25,10 +25,6 @@ class Article < Sequel::Model
     Article.ordered.where("published_at < ?", published_at).first
   end
 
-  def serialization_attributes
-    values.merge(published_at: published_at.iso8601)
-  end
-
   def summary_html
     summary ? render_markdown(summary) : nil
   end
@@ -41,6 +37,14 @@ class Article < Sequel::Model
     super
     validates_presence [:title, :slug, :content, :published_at]
     validates_unique [:slug]
+  end
+
+  #
+  # Serialization
+  #
+
+  def v1_attributes
+    values.merge(published_at: published_at.iso8601)
   end
 
   private
