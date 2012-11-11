@@ -24,11 +24,10 @@ gem "uglifier"
 gem "yui-compressor"
 
 group :development, :test do
-  gem "debugger",        "~> 1.1.3"
-  gem "m",               "~> 1.1"
+  gem "debugger"
   gem "rack-test"
-  gem "rake",            "~> 0.9.2.2"
-  gem "rr",              "~> 1.0.4"
-  gem "sinatra-contrib", "~> 1.3.1"
-  gem "turn",            "~> 0.9.4"
+  gem "rake"
+  gem "rr"
+  gem "sinatra-contrib"
+  gem "turn"
 end
