@@ -21,6 +21,7 @@ gem "slim"
 gem "sprockets"
 gem "thin"
 gem "uglifier"
+gem "yui-compressor"
 
 group :development, :test do
   gem "debugger",        "~> 1.1.3"

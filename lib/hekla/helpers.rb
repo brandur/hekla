@@ -38,20 +38,24 @@ module Hekla
       else
         key = request.path_info
         key += "__pjax" if pjax?
-        if cached = settings.cache.get(key)
+        if cached = cache_store.get(key)
           log :cache_hit, path_info: request.path_info, key: key
           cached
         else
           log :cache_miss, key: key
           cached = yield
-          settings.cache.set(key, cached)
+          cache_store.set(key, cached)
           cached
         end
       end
     end
 
     def cache_clear
-      settings.cache.flush if Hekla::Config.production?
+      cache_store.flush if Hekla::Config.production?
+    end
+
+    def cache_store
+      @store ||= Dalli::Client.new
     end
 
     def curl?

@@ -2,10 +2,6 @@ module Hekla
   module Config
     extend self
 
-    def database_url
-      @database_url ||= env!("DATABASE_URL")
-    end
-
     def disable_robots?
       @robots_disabled ||= %w{1 true yes}.include?(env("DISABLE_ROBOTS"))
     end

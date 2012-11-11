@@ -1,10 +1,9 @@
-require "test_helper"
-require "rack/test"
+require_relative "./test_helper"
 
 describe Hekla do
   include Rack::Test::Methods
 
-  let(:app)              { Sinatra::Application }
+  let(:app)              { Hekla::Main }
   let(:article)          { Article.new(valid_attributes) }
   let(:cache)            { CacheStub.new }
   let(:valid_attributes) {
@@ -16,15 +15,7 @@ describe Hekla do
   }
 
   before do
-    set :cache, cache
-
-    stub(Hekla::Config).theme { "the-surf" }
-    set :views, settings.root + "/../themes/#{Hekla::Config.theme}/views"
-
-    stub(Hekla::Config).http_api_key { "KEY" }
-
-    # so we can test fancy stuff like caching
-    stub(Hekla::Config).production? { true }
+    stub(Dalli::Client).new { cache }
   end
 
   it "responds with a 404" do

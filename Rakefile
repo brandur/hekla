@@ -1,10 +1,7 @@
 require "bundler/setup"
-require "logger"
-require "rake/testtask"
 Bundler.require
 
-$: << "./lib"
-require "hekla"
+require "rake/testtask"
 
 Rake::TestTask.new do |t|
   t.libs.push "lib", "test"
@@ -13,8 +10,8 @@ Rake::TestTask.new do |t|
 end
 
 task :environment do
+  require_relative "./lib/hekla"
   DB = Sequel.connect(Hekla::Config.database_url)
-  require_relative "models/article"
 end
 
 task :lorem => :environment do

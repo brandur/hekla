@@ -1,16 +1,19 @@
 require 'bundler/setup'
-Bundler.require
+Bundler.require(:default, :test)
 
 require "minitest/spec"
 require "minitest/autorun"
 require "turn/autorun"
 require "rr"
 
+ENV["HTTP_API_KEY"] = "KEY"
+ENV["RACK_ENV"]     = "production"
+ENV["THEME"]        = "the-surf"
+
 database_url = "postgres://localhost/the-surf-test"
 DB = Sequel.connect(database_url)
 
-require_relative("../lib/hekla")
-require_relative("../hekla")
+require_relative "../lib/hekla"
 
 class CacheStub
   def initialize
