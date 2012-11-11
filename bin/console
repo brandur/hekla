@@ -1,16 +1,15 @@
 #!/usr/bin/env ruby
 
-require "irb"
-require "irb/completion"
 require "bundler/setup"
 Bundler.require
 
-$: << "./lib"
-require "hekla"
+require "irb"
+require "irb/completion"
 
-DB = Sequel.connect(Hekla::Config.database_url)
+DB = Sequel.connect(ENV["DATABASE_URL"] ||
+  raise("missing_environment=DATABASE_URL"))
 
-require_relative "../models/article"
+require_relative "../lib/hekla"
 
 # Sinatra actually has a hook on `at_exit` that activates whenever it's
 # included. This setting will suppress it.
