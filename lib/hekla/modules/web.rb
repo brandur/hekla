@@ -58,13 +58,13 @@ module Hekla::Modules
     end
 
     get "/:id.:format" do |id, format|
-      redirect to("/#{id}") if Article.find_by_slug(id)
-      raise(Sinatra::NotFound)
+      Article.first(slug: id) || raise(Sinatra::NotFound)
+      redirect to("/#{id}")
     end
 
     get "/:id" do |id|
       cache do
-        @article = Article.find_by_slug!(id)
+        @article = Article.first(slug: id) || raise(Sinatra::NotFound)
         @title = @article.title
         slim :show, layout: !pjax?
       end
@@ -73,8 +73,8 @@ module Hekla::Modules
     # redirect old style permalinks
     get "/articles/:id" do |id|
       log :get_article, old_permalink: true
-      redirect to("/#{id}") if Article.find_by_slug(id)
-      raise(Sinatra::NotFound)
+      Article.first(slug: id) || raise(Sinatra::NotFound)
+      redirect to("/#{id}")
     end
 
     get "/a/:id" do |id|

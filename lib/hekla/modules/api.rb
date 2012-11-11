@@ -42,7 +42,7 @@ module Hekla::Modules
 
     put "/articles/:id" do |id|
       authorized!
-      @article = Article.find_by_slug!(id)
+      @article = Article.first(slug: id) || raise(Sinatra::NotFound)
       @article.update(article_params)
       cache_clear
       [200, encode_json(@article.v1_attributes)]
@@ -50,7 +50,7 @@ module Hekla::Modules
 
     delete "/articles/:id" do |id|
       authorized!
-      @article = Article.find_by_slug!(id)
+      @article = Article.first(slug: id) || raise(Sinatra::NotFound)
       @article.destroy
       cache_clear
       [200, encode_json(@article.v1_attributes)]

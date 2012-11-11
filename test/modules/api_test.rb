@@ -81,7 +81,7 @@ describe Hekla::Modules::API do
 
     it "fails to update an article" do
       authorize "", "KEY"
-      mock(Article).find_by_slug!("about") { article }
+      mock(Article).first(slug: "about") { article }
       mock(article).update.with_any_args {
         raise(Sequel::ValidationFailed.new([]))
       }

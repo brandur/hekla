@@ -1,14 +1,6 @@
 class Article < Sequel::Model
   plugin :validation_helpers
 
-  def self.find_by_slug(s)
-    filter(slug: s).first
-  end
-
-  def self.find_by_slug!(s)
-    find_by_slug(s) || raise(Sinatra::NotFound)
-  end
-
   def self.ordered
     reverse_order(:published_at)
   end
