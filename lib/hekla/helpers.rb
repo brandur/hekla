@@ -33,7 +33,7 @@ module Hekla
     end
 
     def cache
-      if Hekla::Config.development?
+      if !Hekla::Config.production?
         yield
       else
         key = request.path_info
@@ -51,7 +51,7 @@ module Hekla
     end
 
     def cache_clear
-      settings.cache.flush unless Hekla::Config.development?
+      settings.cache.flush if Hekla::Config.production?
     end
 
     def curl?

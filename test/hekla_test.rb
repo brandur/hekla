@@ -24,7 +24,7 @@ describe Hekla do
     stub(Hekla::Config).http_api_key { "KEY" }
 
     # so we can test fancy stuff like caching
-    stub(Hekla::Config).development? { false }
+    stub(Hekla::Config).production? { true }
   end
 
   it "responds with a 404" do

@@ -15,11 +15,11 @@ DB = Sequel.connect(Hekla::Config.database_url)
 # Sinatra app
 require "./hekla"
 
-require "sinatra/reloader" if Hekla::Config.development?
+require "sinatra/reloader" if !Hekla::Config.production?
 
 configure do
   set :assets,          settings.root + "/themes/#{Hekla::Config.theme}/assets"
-  set :cache,           Dalli::Client.new unless Hekla::Config.development?
+  set :cache,           Dalli::Client.new if Hekla::Config.production?
   set :show_exceptions, false
   set :views,           settings.root + "/themes/#{Hekla::Config.theme}/views"
 end
@@ -39,7 +39,7 @@ map "/assets" do
 end
 
 map "/" do
-  use Rack::SSL unless Hekla::Config.development?
+  use Rack::SSL if Hekla::Config.production?
   use Rack::Instruments
   use Rack::Robots
   run Sinatra::Application

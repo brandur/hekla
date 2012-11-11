@@ -6,16 +6,16 @@ module Hekla
       @database_url ||= env!("DATABASE_URL")
     end
 
-    def development?
-      rack_env == "development"
-    end
-
     def disable_robots?
       @robots_disabled ||= %w{1 true yes}.include?(env("DISABLE_ROBOTS"))
     end
 
     def http_api_key
       @http_api_key ||= env!("HTTP_API_KEY")
+    end
+
+    def production?
+      rack_env == "production"
     end
 
     def theme
