@@ -39,7 +39,7 @@ map "/assets" do
 end
 
 map "/" do
-  use Rack::SSL if Hekla::Config.force_ssl?
+  use Rack::SSL unless Hekla::Config.development?
   use Rack::Instruments
   use Rack::Robots
   run Sinatra::Application
