@@ -17,7 +17,7 @@ Deploy to Heroku:
 ``` bash
 git clone https://github.com/brandur/hekla.git
 cd hekla
-heroku create -s cedar the-surf
+heroku create the-surf
 export HTTP_API_KEY=$(ruby -e "require 'securerandom'; puts SecureRandom.hex(20)")
 heroku config:add THEME=the-surf HTTP_API_KEY=$HTTP_API_KEY
 git push heroku
