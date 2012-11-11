@@ -6,6 +6,7 @@ require_relative "hekla/lorem_ipsum"
 
 require_relative "hekla/models/article"
 
+require_relative "hekla/modules/api"
 require_relative "hekla/modules/assets"
 require_relative "hekla/modules/web"
 
