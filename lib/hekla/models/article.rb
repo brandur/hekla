@@ -25,12 +25,12 @@ class Article < Sequel::Model
     Article.ordered.where("published_at < ?", published_at).first
   end
 
-  def summary_html
-    summary ? render_markdown(summary) : nil
+  def serialization_attributes
+    values.merge(published_at: published_at.iso8601)
   end
 
-  def to_json(opts = {})
-    values.merge({published_at: published_at.iso8601}).to_json(opts)
+  def summary_html
+    summary ? render_markdown(summary) : nil
   end
 
   def to_path

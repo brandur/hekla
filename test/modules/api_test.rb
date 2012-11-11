@@ -23,14 +23,14 @@ describe Hekla::Modules::API do
 
   describe "POST /articles" do
     it "requires authorization" do
-      post "/articles", { article: valid_attributes.to_json }
+      post "/articles", { article: MultiJson.encode(valid_attributes) }
       last_response.status.must_equal 401
       last_json["message"].must_equal "Not authorized"
     end
 
     it "creates an article" do
       authorize "", "KEY"
-      post "/articles", { article: valid_attributes.to_json }
+      post "/articles", { article: MultiJson.encode(valid_attributes) }
       last_response.status.must_equal 201
     end
 
@@ -48,7 +48,7 @@ describe Hekla::Modules::API do
       authorize "", "KEY"
       mock(article).save { raise(Sequel::ValidationFailed.new([])) }
       mock(Article).new.with_any_args { article }
-      post "/articles", { article: valid_attributes.to_json }
+      post "/articles", { article: MultiJson.encode(valid_attributes) }
       last_response.status.must_equal 422
       last_json.wont_equal nil
     end
@@ -58,14 +58,14 @@ describe Hekla::Modules::API do
     before { article.save }
 
     it "requires authorization" do
-      put "/articles/about", { article: valid_attributes.to_json }
+      put "/articles/about", { article: MultiJson.encode(valid_attributes) }
       last_response.status.must_equal 401
       last_json["message"].must_equal "Not authorized"
     end
 
     it "updates an article" do
       authorize "", "KEY"
-      put "/articles/about", { article: valid_attributes.to_json }
+      put "/articles/about", { article: MultiJson.encode(valid_attributes) }
       last_response.status.must_equal 200
     end
 
@@ -85,7 +85,7 @@ describe Hekla::Modules::API do
       mock(article).update.with_any_args {
         raise(Sequel::ValidationFailed.new([]))
       }
-      put "/articles/about", { article: valid_attributes.to_json }
+      put "/articles/about", { article: MultiJson.encode(valid_attributes) }
       last_response.status.must_equal 422
       last_json.wont_equal nil
     end

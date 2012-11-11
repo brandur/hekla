@@ -11,14 +11,14 @@ module Hekla::Modules
     #
 
     error Sequel::ValidationFailed do
-      [422, @article.errors.flatten.to_json]
+      [422, encode_json(@article.errors.flatten)]
     end
 
     error do
       log :error, type: env['sinatra.error'].class.name,
         message: env['sinatra.error'].message,
         backtrace: env['sinatra.error'].backtrace
-      [500, { message: "Internal server error" }.to_json]
+      [500, encode_json({ message: "Internal server error" })]
     end
 
     #
@@ -30,7 +30,7 @@ module Hekla::Modules
       @article = Article.new(article_params)
       @article.save
       cache_clear
-      [201, @article.to_json(pretty: curl?)]
+      [201, encode_json(@article)]
     end
 
     put "/articles/:id" do |id|
@@ -38,7 +38,7 @@ module Hekla::Modules
       @article = Article.find_by_slug!(id)
       @article.update(article_params)
       cache_clear
-      [200, @article.to_json(pretty: curl?)]
+      [200, encode_json(@article)]
     end
 
     delete "/articles/:id" do |id|
@@ -46,7 +46,7 @@ module Hekla::Modules
       @article = Article.find_by_slug!(id)
       @article.destroy
       cache_clear
-      [200, @article.to_json(pretty: curl?)]
+      [200, encode_json(@article)]
     end
   end
 end

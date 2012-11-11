@@ -28,7 +28,7 @@ module Hekla
     def authorized!
       unless authorized?
         log :unauthorized
-        throw(:halt, [401, { message: "Not authorized" }.to_json])
+        throw(:halt, [401, encode_json({ message: "Not authorized" })])
       end
     end
 
@@ -60,6 +60,10 @@ module Hekla
 
     def curl?
       !!(request.user_agent =~ /curl/)
+    end
+
+    def encode_json(obj)
+      MultiJson.encode(obj, pretty: curl?)
     end
 
     # @todo: OMG HOLY SHIT FUGLY

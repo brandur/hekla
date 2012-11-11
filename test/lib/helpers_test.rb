@@ -5,14 +5,14 @@ describe Hekla::Helpers do
 
   describe "#article_params" do
     def params
-      { article: {
+      { article: MultiJson.encode({
         title:        "About",
         slug:         "about",
         summary:      "About the Surf.",
         content:      "About the Surf.",
         published_at: "today",
         other:        "random!",
-      }.to_json }
+      }) }
     end
 
     it "receives a standard article hash" do

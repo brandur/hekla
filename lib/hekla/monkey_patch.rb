@@ -39,12 +39,6 @@ class NilClass
   end
 end
 
-class Object
-  def to_json(opts = {})
-    MultiJson.dump(self, opts)
-  end
-end
-
 class String
   def blank?
     respond_to?(:empty?) ? empty? : !self
