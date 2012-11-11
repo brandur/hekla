@@ -1,6 +1,8 @@
 module Hekla::Modules
   class Web < Sinatra::Base
-    include Hekla::Helpers
+    include Hekla::Helpers::Cache
+    include Hekla::Helpers::General
+    include Hekla::Helpers::Web
 
     configure do
       set :root,            File.expand_path("../../../../", __FILE__)

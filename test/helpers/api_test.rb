@@ -1,7 +1,7 @@
 require_relative "../test_helper"
 
-describe Hekla::Helpers do
-  include Hekla::Helpers
+describe Hekla::Helpers::API do
+  include Hekla::Helpers::API
 
   describe "#article_params" do
     def params
@@ -28,8 +28,8 @@ describe Hekla::Helpers do
   end
 end
 
-describe Hekla::Helpers do
-  include Hekla::Helpers
+describe Hekla::Helpers::API do
+  include Hekla::Helpers::API
 
   describe "#article_params" do
     def attributes
