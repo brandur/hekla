@@ -2,7 +2,6 @@ require_relative "hekla/monkey_patch"
 
 require_relative "hekla/config"
 require_relative "hekla/helpers"
-require_relative "hekla/lorem_ipsum"
 
 require_relative "hekla/models/article"
 
