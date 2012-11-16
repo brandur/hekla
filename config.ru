@@ -13,9 +13,7 @@ require "sinatra/reloader" if !Hekla::Config.production?
 
 Slim::Engine.set_default_options format: :html5, pretty: true
 
-map "/" do
-  use Rack::SSL if Hekla::Config.production?
-  use Rack::Instruments
-  use Rack::Robots
-  run Hekla::Main
-end
+use Rack::SSL if Hekla::Config.production?
+use Rack::Instruments
+use Rack::Robots
+run Hekla::Main
