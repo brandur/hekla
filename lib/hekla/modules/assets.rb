@@ -1,7 +1,7 @@
 module Hekla::Modules
   class Assets < Sinatra::Base
     configure do
-      set :root, File.expand_path("../../../../", __FILE__)
+      set :root, Hekla::Config.root
       set :assets, (Sprockets::Environment.new { |env|
         path = settings.root + "/themes/#{Hekla::Config.theme}/assets"
         Slides.log :assets, path: path

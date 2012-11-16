@@ -5,7 +5,7 @@ module Hekla::Modules
     include Hekla::Helpers::Web
 
     configure do
-      set :root,            File.expand_path("../../../../", __FILE__)
+      set :root,            Hekla::Config.root
       set :show_exceptions, false
       set :views,           settings.root + "/themes/#{Hekla::Config.theme}/views"
       Slides.log :views, path: settings.views
