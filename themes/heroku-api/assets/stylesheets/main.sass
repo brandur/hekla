@@ -20,8 +20,38 @@ body
     &:hover
       text-decoration: underline
 
+  h1, h2, h3, h4, p, ol, ul
+    @include content
+
+  h1, h3, h3, h4
+    color: $font_color
+    margin-bottom: 30px
+    margin-top: 30px
+
   h1
     font-size: 30px
+
+  ol, ul
+
+    li
+      margin-bottom: 5px
+
+  ol
+    list-style-type: decimal
+
+    li
+      margin-left: 55px
+
+  p
+    margin-bottom: 20px
+    margin-top: 20px
+
+  ul
+    list-style-type: disc
+
+    li
+      margin-left: 50px
+      padding-left: 5px
 
   article
     margin: 50px 0
@@ -30,18 +60,6 @@ body
       background: #efefef
       border: 1px solid #cecece
       padding: 2px 4px
-
-    h1, h2, h3, h4, p
-      @include content
-
-    h1, h3, h3, h4
-      color: $font_color
-      margin-bottom: 30px
-      margin-top: 30px
-
-    p
-      margin-bottom: 20px
-      margin-top: 20px
 
     pre
       background: #1b1b24 url('/assets/pattern-seigaiha2.png') repeat
@@ -67,6 +85,11 @@ body
     .extra
       color: $light
       font-size: 14px
+
+      img
+        border-radius: 10px
+        margin: 0 10px 0 0
+        vertical-align: middle
 
     .attachment
       background: #1b1b24
