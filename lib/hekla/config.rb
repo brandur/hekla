@@ -14,6 +14,14 @@ module Hekla
       rack_env == "production"
     end
 
+    def release
+      @release ||= File.read("#{root}/.git/refs/heads/master").strip[0..10] || "r1"
+    end
+
+    def root
+      @root ||= File.expand_path("../../../", __FILE__)
+    end
+
     def theme
       @theme ||= env!("THEME")
     end

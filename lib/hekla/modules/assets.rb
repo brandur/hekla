@@ -17,12 +17,12 @@ module Hekla::Modules
       })
     end
 
-    get "/assets/app.js" do
+    get "/assets/:release/app.js" do
       content_type("application/javascript")
       settings.assets["app.js"]
     end
 
-    get "/assets/app.css" do
+    get "/assets/:release/app.css" do
       content_type("text/css")
       settings.assets["app.css"]
     end
