@@ -2,8 +2,9 @@ article
   h1= @article.title
   == @article.content_html
   p.extra
-    - if @article.metadata && @article.metadata[:location]
-      | Published #{@article.published_at.strftime("%B %d, %Y")} from #{@article.metadata[:location]}. 
-    - else
-      | Published #{@article.published_at.strftime("%B %d, %Y")}. 
-    == link_to 'Permalink.', @article, "data-pjax" => "#content"
+    / @article.metadata[:twitter] and @article.metadata[:email]
+    - if @article.metadata && @article.metadata[:email]
+      img src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@article.metadata[:email])}?s=40"
+    - @article.metadata && if @article.metadata[:twitter]
+      | <a href="https://twitter.com/brandur">@brandur</a> / 
+    | #{@article.published_at.iso8601} / #{{link_to 'Permalink', @article, "data-pjax" => "#content"}}
