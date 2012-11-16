@@ -1,5 +1,9 @@
 article
-  h1= @article.title
+  - if @link_article
+    == link_to @article, { "data-pjax" => "#content", "class" => "vanilla" } do
+      h1= @article.title
+  - else
+    h1= @article.title
   == @article.content_html
   p.extra
     / @article.metadata[:twitter] and @article.metadata[:email]

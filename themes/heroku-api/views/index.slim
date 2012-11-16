@@ -2,4 +2,6 @@
   title Heroku API Development Blog
 - @articles.each do |article|
   - @article = article
+  - @link_article = true
   == render :slim, :"_article", layout: false
+== render :slim, :"_about", layout: false

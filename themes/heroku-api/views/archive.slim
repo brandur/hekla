@@ -1,0 +1,14 @@
+- if pjax?
+  title= @title
+#archive
+  h1 Archive
+  - @articles.each do |year, articles|
+    - if year != Date.today.year
+      h2= year
+    ul
+      - articles.each do |article|
+        li
+          == link_to article.title, article, "data-pjax" => "#content"
+          |  
+          span.extra= article.published_at.strftime("%b %d")
+== render :slim, :"_about", layout: false

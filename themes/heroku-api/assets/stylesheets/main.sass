@@ -20,16 +20,28 @@ body
     &:hover
       text-decoration: underline
 
+  a.vanilla
+
+    &:hover
+      text-decoration: none
+
+
   h1, h2, h3, h4, p, ol, ul
     @include content
 
-  h1, h3, h3, h4
+  h1, h2, h3, h4
     color: $font_color
     margin-bottom: 30px
     margin-top: 30px
 
   h1
     font-size: 30px
+
+  h2
+    font-size: 25px
+
+  h3
+    font-size: 20px
 
   ol, ul
 
@@ -114,3 +126,13 @@ body
       strong
         color: #7a7a8a
         margin: 0 10px 0 0
+
+  #archive, #other_articles
+
+    ol, ul
+
+      li
+        margin-left: 20px
+
+    .extra
+      color: $light
