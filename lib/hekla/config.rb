@@ -15,7 +15,8 @@ module Hekla
     end
 
     def release
-      @release ||= File.read("#{root}/.git/refs/heads/master").strip[0..10] || "r1"
+      @release ||= File.read("#{root}/.git/refs/heads/master").strip[0..10] \
+        rescue "r1"
     end
 
     def root
