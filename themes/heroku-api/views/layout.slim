@@ -18,15 +18,12 @@ html lang='en'
     == render :slim, :"_analytics", layout: false
 
   body
-    #wrapper
-      .row
-        .col_12.last
-          header
-            #title
-              == link_to "/", "data-pjax" => "#content" do
-                strong Heroku
-                | API Development Blog
-      #content
-        == yield
-      nav
-      footer
+    header
+      #title
+        == link_to "/", "data-pjax" => "#content" do
+          strong Heroku
+          | API Development Blog
+    #content
+      == yield
+    nav
+    footer

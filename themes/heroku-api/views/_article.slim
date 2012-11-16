@@ -1,11 +1,9 @@
-.row
-  .col_12.last
-    article
-      h1= @article.title
-      == @article.content_html
-      p.extra
-        - if @article.metadata && @article.metadata[:location]
-          | Published #{@article.published_at.strftime("%B %d, %Y")} from #{@article.metadata[:location]}. 
-        - else
-          | Published #{@article.published_at.strftime("%B %d, %Y")}. 
-        == link_to 'Permalink.', @article, "data-pjax" => "#content"
+article
+  h1= @article.title
+  == @article.content_html
+  p.extra
+    - if @article.metadata && @article.metadata[:location]
+      | Published #{@article.published_at.strftime("%B %d, %Y")} from #{@article.metadata[:location]}. 
+    - else
+      | Published #{@article.published_at.strftime("%B %d, %Y")}. 
+    == link_to 'Permalink.', @article, "data-pjax" => "#content"

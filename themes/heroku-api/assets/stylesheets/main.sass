@@ -1,60 +1,91 @@
-//$font_color: #7a7a8a
-$font_color: #9a9aaa
-$font_color_highlight: #b0aec8
+$font_color: #000
+$light: #ababab
+
+@mixin content
+  margin: 0 auto
+  min-width: 400px
+  max-width: 744px
 
 body
-  background: #1b1b24
+  background: #fff
   color: $font_color
   font-family: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
   font-size: 16px
   line-height: 1.5em
-  margin: 30px 40px
 
   a
     color: #7c76b8
     text-decoration: none
 
     &:hover
-      color: #fff
-
-  code, pre
-    font-family: Menlo, Monaco, monospace
-
-  h1, h2, h3, h4
-    color: $font_color_highlight
-    margin: 30px 0
+      text-decoration: underline
 
   h1
     font-size: 30px
 
-  p
-    margin: 20px 0
+  article
+    margin: 10px 0
 
-  #wrapper
-    margin: 0 auto
-    min-width: 400px
-    max-width: 744px
+    code
+      background: #efefef
+      border: 1px solid #cecece
+      padding: 2px 4px
 
-    article
-      margin: 10px 0
+    h1, h2, h3, h4, p
+      @include content
 
-      .extra
+    h1, h3, h3, h4
+      color: $font_color
+      margin-bottom: 30px
+      margin-top: 30px
+
+    p
+      margin-bottom: 20px
+      margin-top: 20px
+
+    pre
+      background: #1b1b24 url('/assets/pattern-seigaiha2.png') repeat
+      color: #cecece
+      font-family: Menlo, Monaco, monospace
+      margin-bottom: 20px
+      margin-top: 20px
+      padding: 20px
+
+      box-shadow:         inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
+      -moz-box-shadow:    inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
+      -webkit-box-shadow: inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
+
+      code
+        @include content
+        background: transparent
+        border: 0
+        display: block
+        padding: 0
+
+    .extra
+      color: $light
+      font-size: 14px
+
+    .attachment
+      background: #1b1b24
+
+  header
+    margin: 10px 0
+
+    #title
+      @include content
+      color: $font_color
+      font-family: hybrea, "helvetica neue", helvetica, arial, geneva, sans-serif
+      font-size: 20px
+      font-weight: 400
+      margin-bottom: 30px
+      margin-top: 30px
+      text-transform: lowercase
+
+      a
+        color: $font_color
+        text-decoration: none
+
+      strong
         color: #7a7a8a
-
-    header
-      margin: 10px 0
-
-      #title
-        color: $font_color_highlight
-        font-family: hybrea, "helvetica neue", helvetica, arial, geneva, sans-serif
-        font-size: 20px
-        font-weight: 400
-        text-transform: lowercase
-
-        a
-          color: $font_color_highlight
-          text-decoration: none
-
-        strong
-          color: #7a7a8a
-          margin: 0 10px 0 0
+        margin: 0 10px 0 0
