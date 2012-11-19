@@ -1,5 +1,5 @@
-$font_color: #000
 $light: #ababab
+$normal: #000
 
 @mixin attachment
   background: #1b1b24 url('/assets/pattern-seigaiha2.png') repeat
@@ -17,10 +17,11 @@ $light: #ababab
   margin: 0 auto
   min-width: 400px
   max-width: 744px
+  padding: 0 20px
 
 body
   background: #fff
-  color: $font_color
+  color: $normal
   font-family: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
   font-size: 16px
   line-height: 1.6em
@@ -44,7 +45,7 @@ body
     @include content
 
   h1, h2, h3, h4
-    color: $font_color
+    color: $normal
     margin-bottom: 30px
     margin-top: 30px
 
@@ -124,7 +125,7 @@ body
 
     #title
       @include content
-      color: $font_color
+      color: $normal
       font-family: hybrea, "helvetica neue", helvetica, arial, geneva, sans-serif
       font-size: 20px
       font-weight: 400
@@ -133,7 +134,7 @@ body
       text-transform: lowercase
 
       a
-        color: $font_color
+        color: $normal
         text-decoration: none
 
       strong
