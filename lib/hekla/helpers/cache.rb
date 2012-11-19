@@ -4,7 +4,7 @@ module Hekla::Helpers
       if !Hekla::Config.production?
         yield
       else
-        key = request.path_info
+        key = "#{Hekla::Config.release}_#{request.path_info}"
         key += "__pjax" if pjax?
         if cached = cache_store.get(key)
           log :cache_hit, path_info: request.path_info, key: key
