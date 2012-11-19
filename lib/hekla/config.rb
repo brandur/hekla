@@ -15,8 +15,7 @@ module Hekla
     end
 
     def release
-      # really bad, but Heroku doesn't give us a release number
-      @release ||= Dir["#{root}*/**/*"].map { |f| File.mtime(f).to_i }.max
+      @release ||= env("RELEASE") || "1"
     end
 
     def root
