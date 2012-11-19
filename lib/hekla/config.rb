@@ -15,8 +15,8 @@ module Hekla
     end
 
     def release
-      @release ||= File.read("#{root}/.git/refs/heads/master").strip[0..10] \
-        rescue "r1"
+      # really bad, but Heroku doesn't give us a release number
+      @release ||= Dir["#{root}*/**/*"].map { |f| File.mtime(f).to_i }.max
     end
 
     def root
