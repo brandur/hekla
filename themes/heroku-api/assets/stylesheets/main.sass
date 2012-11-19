@@ -1,6 +1,18 @@
 $font_color: #000
 $light: #ababab
 
+@mixin attachment
+  background: #1b1b24 url('/assets/pattern-seigaiha2.png') repeat
+  color: #cecece
+  margin-bottom: 30px
+  margin-top: 30px
+  overflow: hidden
+  padding: 20px
+
+  box-shadow:         inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
+  -moz-box-shadow:    inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
+  -webkit-box-shadow: inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
+
 @mixin content
   margin: 0 auto
   min-width: 400px
@@ -79,18 +91,9 @@ body
       padding: 2px 4px
 
     pre
-      background: #1b1b24 url('/assets/pattern-seigaiha2.png') repeat
-      color: #cecece
+      @include attachment
       font-family: Menlo, Monaco, monospace
       font-size: 15px
-      margin-bottom: 20px
-      margin-top: 20px
-      overflow: hidden
-      padding: 20px
-
-      box-shadow:         inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
-      -moz-box-shadow:    inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
-      -webkit-box-shadow: inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
 
       code
         @include content
@@ -109,7 +112,12 @@ body
         vertical-align: middle
 
     .attachment
-      background: #1b1b24
+      @include attachment
+
+      img
+        box-shadow: 0 0 10px #000
+        display: block
+        margin: 20px auto
 
   header
     margin: 10px 0
