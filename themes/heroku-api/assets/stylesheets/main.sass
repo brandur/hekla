@@ -16,14 +16,14 @@ $normal: #000
 @mixin content
   margin: 0 auto
   min-width: 400px
-  max-width: 744px
+  max-width: 680px
   padding: 0 20px
 
 body
   background: #fff
   color: $normal
   font-family: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
-  font-size: 16px
+  font-size: 15px
   line-height: 1.6em
 
   a
@@ -68,6 +68,11 @@ body
 
     li
       margin-left: 55px
+
+  p, li
+    hyphens: auto
+    -moz-hyphens: auto
+    -webkit-hyphens: auto
 
   p
     margin-bottom: 20px
@@ -116,9 +121,12 @@ body
       @include attachment
 
       img
-        box-shadow: 0 0 10px #000
         display: block
         margin: 20px auto
+
+        box-shadow: 0 0 10px #000
+        -moz-box-shadow: 0 0 10px #000
+        -webkit-box-shadow: 0 0 10px #000
 
   header
     margin: 10px 0
