@@ -19,19 +19,26 @@ module Hekla::Modules
 
     get "/assets/:release/app.js" do
       content_type("application/javascript")
-      settings.assets["app.js"]
+      respond_with_asset(settings.assets["app.js"])
     end
 
     get "/assets/:release/app.css" do
       content_type("text/css")
-      settings.assets["app.css"]
+      respond_with_asset(settings.assets["app.css"])
     end
 
     %w{jpg png}.each do |format|
       get "/assets/:image.#{format}" do |image|
         content_type("image/#{format}")
-        settings.assets["#{image}.#{format}"]
+        respond_with_asset(settings.assets["#{image}.#{format}"])
       end
+    end
+
+    private
+
+    def respond_with_asset(asset)
+      last_modified(asset.mtime.utc)
+      asset
     end
   end
 end
