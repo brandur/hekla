@@ -1,6 +1,6 @@
 article
   - if @link_article
-    == link_to @article, { "data-pjax" => "#content", "class" => "vanilla" } do
+    == link_to @article, { "data-pjax" => "#content" } do
       h1= @article.title
   - else
     h1= @article.title
@@ -9,7 +9,7 @@ article
     / @article.metadata[:twitter] and @article.metadata[:email]
     - if @article.metadata && @article.metadata[:email] && @article.metadata[:twitter]
       == link_to "https://twitter.com/#{@article.metadata[:twitter]}" do
-        img src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@article.metadata[:email])}?s=40"
+        img src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@article.metadata[:email])}?s=60"
     - @article.metadata && if @article.metadata[:twitter]
       | <a href="https://twitter.com/#{@article.metadata[:twitter]}">@#{@article.metadata[:twitter]}</a> / 
     | #{@article.published_at.iso8601} / #{{link_to 'Permalink', @article, "data-pjax" => "#content"}}

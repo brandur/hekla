@@ -3,3 +3,4 @@
 .rbenv-version
 .sass-cache
 *.gem
+.env
