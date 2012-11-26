@@ -33,6 +33,7 @@ module Hekla::Modules
     #
 
     get "/" do
+      last_modified!(Article.ordered.first)
       cache do
         @articles = Article.ordered.limit(10)
         slim :index, layout: !pjax?
@@ -40,6 +41,7 @@ module Hekla::Modules
     end
 
     get "/articles.atom" do
+      last_modified!(Article.ordered.first)
       cache do
         @articles = Article.ordered.limit(20)
         builder :articles
@@ -47,6 +49,7 @@ module Hekla::Modules
     end
 
     get "/archive" do
+      last_modified!(Article.ordered.first)
       cache do
         @articles = Article.ordered.all.group_by { |a| a.published_at.year }
           .sort.reverse
@@ -61,8 +64,9 @@ module Hekla::Modules
     end
 
     get "/:id" do |id|
+      @article = Article.first(slug: id) || raise(Sinatra::NotFound)
+      last_modified!(@article)
       cache do
-        @article = Article.first(slug: id) || raise(Sinatra::NotFound)
         @title = @article.title
         slim :show, layout: !pjax?
       end

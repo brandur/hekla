@@ -84,7 +84,14 @@ describe Hekla::Modules::Web do
       last_response.body.include?("<title").must_equal true
     end
 
-    it "caches an article" do
+    it "caches an article on the client" do
+      get "/about", {},
+        { "HTTP_IF_MODIFIED_SINCE" => article.updated_at.utc.httpdate }
+      last_response.status.must_equal 304
+      last_response.body.must_equal ""
+    end
+
+    it "caches an article on the server" do
       get "/about"
       last_response.status.must_equal 200
       cache.get("1__/about").include?("<html").must_equal true
