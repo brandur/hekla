@@ -87,25 +87,25 @@ describe Hekla::Modules::Web do
     it "caches an article" do
       get "/about"
       last_response.status.must_equal 200
-      cache.get("/about").include?("<html").must_equal true
+      cache.get("1__/about").include?("<html").must_equal true
     end
 
     it "caches an article without layout" do
       get "/about", {}, "X-PJAX" => true
       last_response.status.must_equal 200
-      cache.get("/about__pjax").include?("<html").must_equal false
-      cache.get("/about__pjax").include?("<title").must_equal true
+      cache.get("1__/about__pjax").include?("<html").must_equal false
+      cache.get("1__/about__pjax").include?("<title").must_equal true
     end
 
     it "shows a cached article" do
-      cache.set("/about", "About the Surf.")
+      cache.set("1__/about", "About the Surf.")
       get "/about"
       last_response.status.must_equal 200
       last_response.body.must_equal "About the Surf."
     end
 
     it "shows a cached article without layout" do
-      cache.set("/about__pjax", "About the Surf.")
+      cache.set("1__/about__pjax", "About the Surf.")
       get "/about", {}, "X-PJAX" => true
       last_response.status.must_equal 200
       last_response.body.must_equal "About the Surf."
