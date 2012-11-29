@@ -1,0 +1,5 @@
+.DS_Store
+.bundle
+.rbenv-version
+.sass-cache
+*.gem
