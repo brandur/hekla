@@ -25,10 +25,10 @@ heroku run 'sequel -m db/migrate $DATABASE_URL'
 heroku addons:add memcache:5mb
 ```
 
-Upload an article using a template like [the-surf-content](https://github.com/brandur/the-surf-content):
+Upload an article using a template like [the-surf](https://github.com/brandur/the-surf):
 
 ``` bash
-git clone https://github.com/brandur/the-surf-content.git
+git clone https://github.com/brandur/the-surf.git
 export THE_SURF_HTTP_AUTH_KEY=$HTTP_API_KEY
 export THE_SURF_HOST="https://the-surf.herokuapp.com"
 bin/new articles/test-article
