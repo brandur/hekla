@@ -1,13 +1,19 @@
 Hekla
 =====
 
-Successor to Askja, a very simplistic blogging platform designed specifically for running on ephemeral platforms (like Heroku).
+Successor to Askja, a very simplistic blogging platform designed specifically
+for running on ephemeral platforms (like Heroku).
 
 The main features of Hekla:
 
-* **Fast** iteration on article versions. Updating an article is done via a simple JSON API, and when hit with a client like Curl an update is possible almost instantaneously.
-* Supports multiple "blogs" in the same repository by creating new directories under `themes`. These still need to be deployed separately, but can share a common codebase.
-* Not as susceptible to frequent security exploits or outdating (i.e. unlike my previous versions, it's not written in Rails).
+* **Fast** iteration on article versions. Updating an article is done via a
+  simple JSON API, and when hit with a client like Curl an update is possible
+  almost instantaneously.
+* Supports multiple "blogs" in the same repository by creating new directories
+  under `themes`. These still need to be deployed separately, but can share a
+  common codebase.
+* Not as susceptible to frequent security exploits or outdating (i.e. unlike my
+  previous versions, it's not written in Rails).
 
 Deployment
 ----------
@@ -25,7 +31,8 @@ heroku run 'sequel -m db/migrate $DATABASE_URL'
 heroku addons:add memcache:5mb
 ```
 
-Upload an article using a template like [the-surf](https://github.com/brandur/the-surf):
+Upload an article using a template like
+[the-surf](https://github.com/brandur/the-surf):
 
 ``` bash
 git clone https://github.com/brandur/the-surf.git
