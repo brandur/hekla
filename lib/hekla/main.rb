@@ -1,7 +1,7 @@
 module Hekla
-  class Main < Sinatra::Base
+  Main = Rack::Builder.new do
     use Modules::Assets
-    use Modules::Web
     use Modules::API
+    run Modules::Web
   end
 end
