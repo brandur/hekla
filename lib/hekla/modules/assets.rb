@@ -17,14 +17,14 @@ module Hekla::Modules
       })
     end
 
-    get "/assets/:release/app.js" do
-      content_type("application/javascript")
-      respond_with_asset(settings.assets["app.js"])
-    end
-
     get "/assets/:release/app.css" do
       content_type("text/css")
       respond_with_asset(settings.assets["app.css"])
+    end
+
+    get "/assets/:release/app.js" do
+      content_type("application/javascript")
+      respond_with_asset(settings.assets["app.js"])
     end
 
     %w{jpg png}.each do |format|
