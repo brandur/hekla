@@ -15,6 +15,7 @@ DB = Sequel.connect(database_url)
 
 require_relative "../lib/hekla"
 
+# @todo: remove all this
 class Hash
   def slice(*args)
     self.reject { |k, v| !args.include?(k) }
