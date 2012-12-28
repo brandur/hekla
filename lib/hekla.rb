@@ -15,8 +15,3 @@ require_relative "hekla/modules/assets"
 require_relative "hekla/modules/web"
 
 require_relative "hekla/main"
-
-def d
-  require "debugger"
-  debugger
-end
