@@ -41,7 +41,3 @@ module ::Sequel
     end
   end
 end
-
-def e
-  p last_response.errors
-end
