@@ -9,8 +9,6 @@ DB = Sequel.connect(ENV["DATABASE_URL"] ||
 
 require "./lib/hekla"
 
-require "sinatra/reloader" if !Hekla::Config.production?
-
 Slim::Engine.set_default_options format: :html5, pretty: true
 
 use Rack::SSL if Hekla::Config.production?
