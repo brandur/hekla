@@ -26,10 +26,7 @@ gem "uglifier"
 gem "yui-compressor"
 
 group :development, :test do
-  gem "debugger"
   gem "rack-test"
-  gem "rake"
   gem "rr"
-  gem "sinatra-contrib"
   gem "turn"
 end
