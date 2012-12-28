@@ -28,8 +28,17 @@ end
 class MiniTest::Spec
   include RR::Adapters::TestUnit
 
-  before do
-    Article.delete
+  # wrap each test in a transaction to clean the database on completion
+  def run(*args, &block)
+    value = nil
+    begin
+      DB.transaction do
+        value = super
+        raise Sequel::Rollback
+      end
+    rescue Sequel::Rollback
+    end
+    value
   end
 end
 
