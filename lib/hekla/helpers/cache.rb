@@ -1,5 +1,9 @@
+require_relative "general"
+
 module Hekla::Helpers
   module Cache
+    include General
+
     def etag!(article)
       return unless article
       tag = [
