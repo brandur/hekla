@@ -10,7 +10,7 @@ module Hekla::Modules
         env.append_path(path + "/javascripts")
         env.append_path(path + "/stylesheets")
 
-        if ENV["RACK_ENV"] == "production"
+        if Hekla::Config.production?
           env.js_compressor  = YUI::JavaScriptCompressor.new
           env.css_compressor = YUI::CssCompressor.new
         end
