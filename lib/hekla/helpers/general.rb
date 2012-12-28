@@ -17,5 +17,9 @@ module Hekla::Helpers
       log :error, type: e.class.name, message: e.message,
         backtrace: e.backtrace
     end
+
+    def pjax?
+      !!(request.env["X-PJAX"] || request.env["HTTP_X_PJAX"])
+    end
   end
 end

@@ -11,9 +11,5 @@ module Hekla::Helpers
       attr_str = " #{attr_str}" if attr_str.length > 0
       %{<a href="#{uri}" #{attr_str}>#{block_given? ? yield : title}</a>}
     end
-
-    def pjax?
-      !!(request.env["X-PJAX"] || request.env["HTTP_X_PJAX"])
-    end
   end
 end
