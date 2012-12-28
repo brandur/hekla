@@ -8,7 +8,6 @@ describe Hekla::Modules::API do
   end
 
   let(:article)          { Article.new(valid_attributes) }
-  let(:cache)            { CacheStub.new }
   let(:valid_attributes) {
     { title:        "About",
       slug:         "about",
@@ -16,10 +15,6 @@ describe Hekla::Modules::API do
       content:      "About the Surf.",
       published_at: Time.now.iso8601 }
   }
-
-  before do
-    stub(Dalli::Client).new { cache }
-  end
 
   describe "POST /articles" do
     it "requires authorization" do

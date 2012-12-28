@@ -1,9 +1,5 @@
 module Hekla::Helpers
   module Web
-    def last_modified!(article)
-      last_modified(article.updated_at.utc) if article
-    end
-
     # @todo: OMG HOLY SHIT FUGLY
     def link_to(*args)
       attrs = args.last.is_a?(Hash) ? args.pop : {}

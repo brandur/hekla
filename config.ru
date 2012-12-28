@@ -9,9 +9,4 @@ DB = Sequel.connect(ENV["DATABASE_URL"] ||
 
 require "./lib/hekla"
 
-Slim::Engine.set_default_options format: :html5, pretty: true
-
-use Rack::SSL if Hekla::Config.production?
-use Rack::Instruments
-use Rack::Robots
 run Hekla::Main

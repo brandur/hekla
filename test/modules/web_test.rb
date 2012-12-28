@@ -8,7 +8,6 @@ describe Hekla::Modules::Web do
   end
 
   let(:article)          { Article.new(valid_attributes) }
-  let(:cache)            { CacheStub.new }
   let(:valid_attributes) {
     { title:        "About",
       slug:         "about",
@@ -16,10 +15,6 @@ describe Hekla::Modules::Web do
       content:      "About the Surf.",
       published_at: Time.now.iso8601 }
   }
-
-  before do
-    stub(Dalli::Client).new { cache }
-  end
 
   it "responds with a 404" do
     get "/does-not-exist"
@@ -84,38 +79,25 @@ describe Hekla::Modules::Web do
       last_response.body.include?("<title").must_equal true
     end
 
-    it "caches an article on the client" do
+    it "caches an article on the client via If-Modified-Since" do
       get "/about", {},
         { "HTTP_IF_MODIFIED_SINCE" => article.updated_at.utc.httpdate }
       last_response.status.must_equal 304
       last_response.body.must_equal ""
     end
 
-    it "caches an article on the server" do
-      get "/about"
-      last_response.status.must_equal 200
-      cache.get("1__/about").include?("<html").must_equal true
+    it "caches an article on the client via If-None-Match" do
+      tag = "1__/about__#{article.updated_at.utc.to_i}"
+      get "/about", {}, { "HTTP_IF_NONE_MATCH" => "\"#{tag}\"" }
+      last_response.status.must_equal 304
+      last_response.body.must_equal ""
     end
 
-    it "caches an article without layout" do
-      get "/about", {}, "X-PJAX" => true
-      last_response.status.must_equal 200
-      cache.get("1__/about__pjax").include?("<html").must_equal false
-      cache.get("1__/about__pjax").include?("<title").must_equal true
-    end
-
-    it "shows a cached article" do
-      cache.set("1__/about", "About the Surf.")
-      get "/about"
-      last_response.status.must_equal 200
-      last_response.body.must_equal "About the Surf."
-    end
-
-    it "shows a cached article without layout" do
-      cache.set("1__/about__pjax", "About the Surf.")
-      get "/about", {}, "X-PJAX" => true
-      last_response.status.must_equal 200
-      last_response.body.must_equal "About the Surf."
+    it "caches an article without layout on the client via If-None-Match" do
+      tag = "1__/about__#{article.updated_at.utc.to_i}__pjax"
+      get "/about", {}, { "HTTP_IF_NONE_MATCH" => "\"#{tag}\"", "X-PJAX" => true }
+      last_response.status.must_equal 304
+      last_response.body.must_equal ""
     end
   end
 

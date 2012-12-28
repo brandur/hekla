@@ -10,6 +10,17 @@ module Hekla
       @http_api_key ||= env!("HTTP_API_KEY")
     end
 
+    def memcached_url
+      user = env("MEMCACHE_USERNAME")
+      pass = env("MEMCACHE_PASSWORD")
+      url  = env("MEMCACHE_SERVERS")
+      if user && pass && url
+        "memcached://#{user}:#{pass}@#{url}"
+      else
+        nil
+      end
+    end
+
     def production?
       rack_env == "production"
     end

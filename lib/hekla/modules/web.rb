@@ -9,6 +9,7 @@ module Hekla::Modules
       set :show_exceptions, false
       set :views,           settings.root + "/themes/#{Hekla::Config.theme}/views"
       Slides.log :views, path: settings.views
+      Slim::Engine.set_default_options format: :html5, pretty: true
     end
 
     #
@@ -33,29 +34,26 @@ module Hekla::Modules
     #
 
     get "/" do
+      etag!(Article.ordered.first)
       last_modified!(Article.ordered.first)
-      cache do
-        @articles = Article.ordered.limit(10)
-        slim :index, layout: !pjax?
-      end
+      @articles = Article.ordered.limit(10)
+      slim :index, layout: !pjax?
     end
 
     get "/articles.atom" do
+      etag!(Article.ordered.first)
       last_modified!(Article.ordered.first)
-      cache do
-        @articles = Article.ordered.limit(20)
-        builder :articles
-      end
+      @articles = Article.ordered.limit(20)
+      builder :articles
     end
 
     get "/archive" do
+      etag!(Article.ordered.first)
       last_modified!(Article.ordered.first)
-      cache do
-        @articles = Article.ordered.all.group_by { |a| a.published_at.year }
-          .sort.reverse
-        @title = "Archive"
-        slim :archive, layout: !pjax?
-      end
+      @articles = Article.ordered.all.group_by { |a| a.published_at.year }
+        .sort.reverse
+      @title = "Archive"
+      slim :archive, layout: !pjax?
     end
 
     get "/:id.:format" do |id, format|
@@ -65,11 +63,10 @@ module Hekla::Modules
 
     get "/:id" do |id|
       @article = Article.first(slug: id) || raise(Sinatra::NotFound)
+      etag!(@article)
       last_modified!(@article)
-      cache do
-        @title = @article.title
-        slim :show, layout: !pjax?
-      end
+      @title = @article.title
+      slim :show, layout: !pjax?
     end
 
     # redirect old style permalinks

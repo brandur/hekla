@@ -7,31 +7,13 @@ require "turn/autorun"
 require "rr"
 
 ENV["HTTP_API_KEY"] = "KEY"
-ENV["RACK_ENV"]     = "production"
+ENV["RACK_ENV"]     = "test"
 ENV["THEME"]        = "the-surf"
 
 database_url = "postgres://localhost/the-surf-test"
 DB = Sequel.connect(database_url)
 
 require_relative "../lib/hekla"
-
-class CacheStub
-  def initialize
-    @cache = {}
-  end
-
-  def flush
-    @cache.clear
-  end
-
-  def get(key)
-    @cache[key]
-  end
-
-  def set(key, value)
-    @cache[key] = value
-  end
-end
 
 class Hash
   def slice(*args)

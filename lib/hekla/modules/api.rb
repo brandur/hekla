@@ -2,7 +2,6 @@ module Hekla::Modules
   class API < Sinatra::Base
     include Hekla::Helpers::API
     include Hekla::Helpers::Authentication
-    include Hekla::Helpers::Cache
     include Hekla::Helpers::General
 
     configure do
@@ -34,7 +33,6 @@ module Hekla::Modules
       authorized!
       @article = Article.new(article_params)
       @article.save
-      cache_clear
       [201, encode_json(@article.v1_attributes)]
     end
 
@@ -42,7 +40,6 @@ module Hekla::Modules
       authorized!
       @article = Article.first(slug: id) || raise(Sinatra::NotFound)
       @article.update(article_params)
-      cache_clear
       [200, encode_json(@article.v1_attributes)]
     end
 
@@ -50,7 +47,6 @@ module Hekla::Modules
       authorized!
       @article = Article.first(slug: id) || raise(Sinatra::NotFound)
       @article.destroy
-      cache_clear
       [200, encode_json(@article.v1_attributes)]
     end
   end
