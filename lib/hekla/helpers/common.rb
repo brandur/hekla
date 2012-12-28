@@ -1,5 +1,5 @@
 module Hekla::Helpers
-  module General
+  module Common
     def curl?
       !!(request.user_agent =~ /curl/)
     end

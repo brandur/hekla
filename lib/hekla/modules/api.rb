@@ -2,7 +2,7 @@ module Hekla::Modules
   class API < Sinatra::Base
     include Hekla::Helpers::API
     include Hekla::Helpers::Authentication
-    include Hekla::Helpers::General
+    include Hekla::Helpers::Common
 
     configure do
       set :show_exceptions, false

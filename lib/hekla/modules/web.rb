@@ -1,7 +1,7 @@
 module Hekla::Modules
   class Web < Sinatra::Base
     include Hekla::Helpers::Cache
-    include Hekla::Helpers::General
+    include Hekla::Helpers::Common
     include Hekla::Helpers::Web
 
     configure do

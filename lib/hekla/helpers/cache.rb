@@ -1,8 +1,8 @@
-require_relative "general"
+require_relative "common"
 
 module Hekla::Helpers
   module Cache
-    include General
+    include Common
 
     def etag!(article)
       return unless article
