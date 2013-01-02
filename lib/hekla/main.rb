@@ -10,9 +10,9 @@ module Hekla
     use Rack::Robots
 
     run Sinatra::Router.new {
-      route Modules::Assets
-      route Modules::API
-      run Modules::Web
+      mount Hekla::Modules::Assets
+      mount Hekla::Modules::API
+      run Hekla::Modules::Web
     }
   end
 end
