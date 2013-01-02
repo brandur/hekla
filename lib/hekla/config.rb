@@ -13,10 +13,13 @@ module Hekla
     end
 
     def memcached_url
-      user = CGI.escape(env("MEMCACHE_USERNAME"))
-      pass = CGI.escape(env("MEMCACHE_PASSWORD"))
-      url  = CGI.escape(env("MEMCACHE_SERVERS"))
+      user = env("MEMCACHE_USERNAME")
+      pass = env("MEMCACHE_PASSWORD")
+      url  = env("MEMCACHE_SERVERS")
       if user && pass && url
+        user = CGI.escape(user)
+        pass = CGI.escape(pass)
+        url  = CGI.escape(url)
         "memcached://#{user}:#{pass}@#{url}"
       else
         nil
