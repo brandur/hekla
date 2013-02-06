@@ -1,33 +1,21 @@
 $light: #ababab
 $normal: #000
 
-@mixin attachment
-  background: #1b1b24 url('/assets/pattern-seigaiha2.png') repeat
-  color: #cecece
-  margin-bottom: 30px
-  margin-top: 30px
-  overflow: hidden
-  padding: 20px
-
-  box-shadow:         inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
-  -moz-box-shadow:    inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
-  -webkit-box-shadow: inset 0 20px 20px -20px #000, inset 0 -20px 20px -20px #000
-
 @mixin content
   margin: 0 auto
   min-width: 400px
-  max-width: 680px
+  max-width: 800px
   padding: 0 20px
 
 body
-  background: #fff
+  background: #E5E5EC
   color: $normal
   font-family: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
   font-size: 15px
   line-height: 1.6em
 
   a
-    color: #7c76b8
+    color: #514E70
     text-decoration: none
 
     &:hover
@@ -51,9 +39,11 @@ body
 
   h1
     font-size: 30px
+    font-weight: bold
+
 
   h2
-    font-size: 25px
+    font-size: 24px
 
   h3
     font-size: 20px
@@ -89,7 +79,14 @@ body
       padding-left: 5px
 
   article
-    margin: 50px 0
+    border-bottom: 1px dotted grey
+    padding: 20px
+
+    &:first-child
+      padding-top: 0
+
+    &:last-child
+      padding-bottom: 0
 
     code
       background: #efefef
@@ -97,29 +94,38 @@ body
       padding: 2px 4px
 
     pre
-      @include attachment
+      // @include attachment
       font-family: Menlo, Monaco, monospace
       font-size: 14px
 
       code
         @include content
-        background: transparent
+        background: #efefef
         border: 0
         display: block
-        padding: 0
+        padding: 20px
+
+    code, pre
+      .pln
+        color: #333
+
+      .str
+        color: #333
+        background: none
+
+      .pun
+        color: #333
 
     .extra
       color: $light
       font-size: 14px
 
       img
-        border-radius: 10px
+        border-radius: 50%
         margin: 0 10px 0 0
         vertical-align: middle
 
     .attachment
-      @include attachment
-
       img
         display: block
         margin: 20px auto
@@ -129,28 +135,30 @@ body
         -webkit-box-shadow: 0 0 10px #000
 
   header
-    margin: 10px 0
-
     #title
       @include content
       color: $normal
       font-family: hybrea, "helvetica neue", helvetica, arial, geneva, sans-serif
       font-size: 20px
       font-weight: 400
-      margin-bottom: 30px
-      margin-top: 30px
-      text-transform: lowercase
+      padding: 20px
 
       a
-        color: $normal
+        // color: #B0AEC8
+        color: #3A3A4D
         text-decoration: none
 
-      strong
-        color: #7a7a8a
-        margin: 0 10px 0 0
+      span
+        color: #A59999
+        margin: 0 7px 0 0
 
+      nav
+        float: right
+        font-family: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
+
+        a
+          color: #514E70
   #archive, #other_articles
-
     ol, ul
 
       li
@@ -158,3 +166,15 @@ body
 
     .extra
       color: $light
+
+  #archive, #articles
+    padding: 20px
+
+  #about
+    background: #14141A
+    color: #494962
+    padding: 20px
+
+    h2
+      color: #666680
+      margin-top: 10px
