@@ -1,5 +1,6 @@
+$dark: #000
 $light: #ababab
-$normal: #000
+$normal: #555
 
 @mixin attachment
   background: #1b1b24 url('/assets/pattern-seigaiha2.png') repeat
@@ -23,8 +24,8 @@ body
   background: #fff
   color: $normal
   font-family: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
-  font-size: 15px
-  line-height: 1.5em
+  font-size: 19px
+  line-height: 1.6em
 
   a
     color: #7c76b8
@@ -45,20 +46,19 @@ body
     @include content
 
   h1, h2, h3, h4
-    color: $normal
+    color: $dark
+    line-height: 1.4em
     margin-bottom: 30px
     margin-top: 30px
 
   h1
-    border-bottom: 2px solid #bcbcbc
-    font-size: 30px
-    margin-bottom: 20px
-    margin-top: 20px
-    margin-left: auto
-    margin-right: auto
-    padding-bottom: 20px
-    padding-left: 0
-    padding-right: 0
+    border-bottom: 1px solid #bcbcbc
+    font-family: georgia, serif
+    font-size: 40px
+    margin: 40px auto 20px auto
+    max-width: 800px
+    padding: 20px 0 40px 0
+    text-align: center
 
   h2
     font-size: 25px
@@ -133,6 +133,17 @@ body
         margin: 0 10px 0 0
         vertical-align: middle
 
+    .extra_before
+      border-bottom: 1px solid #dedede
+      color: $light
+      font-family: georgia, serif
+      font-size: 14px
+      font-style: italic
+      margin-bottom: 40px
+      padding-bottom: 16px
+      text-align: center
+      text-transform: uppercase
+
     .attachment
       @include attachment
 
@@ -153,8 +164,7 @@ body
       font-family: hybrea, "helvetica neue", helvetica, arial, geneva, sans-serif
       font-size: 20px
       font-weight: 400
-      margin-bottom: 30px
-      margin-top: 30px
+      margin: 16px 0
       text-transform: lowercase
 
       a

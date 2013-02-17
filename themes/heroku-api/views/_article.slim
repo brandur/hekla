@@ -4,6 +4,7 @@ article
       h1= @article.title
   - else
     h1= @article.title
+  p.extra_before February 15th, San Francisco
   == @article.content_html
   p.extra
     / @article.metadata[:twitter] and @article.metadata[:email]
