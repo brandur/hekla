@@ -1,4 +1,12 @@
 article
+  - if @article.id % 4 == 0
+    p.glyph_bamboo
+  - elsif @article.id % 4 == 1
+    p.glyph_blossom
+  - elsif @article.id % 4 == 2
+    p.glyph_bonsai
+  - else
+    p.glyph_garden
   - if @link_article
     == link_to @article, { "data-pjax" => "#content", "class" => "vanilla" } do
       h1= @article.title

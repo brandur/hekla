@@ -2,6 +2,9 @@ $dark: #000
 $light: #ababab
 $normal: #444
 
+$serif: georgia, serif
+$sans_serif: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
+
 @mixin attachment
   background: #1b1b24 url('/assets/pattern-seigaiha2.png') repeat
   color: #cecece
@@ -23,7 +26,7 @@ $normal: #444
 body
   background: #fff
   color: $normal
-  font-family: georgia, serif
+  font-family: $serif
   font-size: 19px
   line-height: 1.7em
 
@@ -47,7 +50,7 @@ body
 
   h1, h2, h3, h4
     color: $dark
-    font-family: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
+    font-family: $sans_serif
     font-weight: 200
     line-height: 1.4em
     margin-bottom: 30px
@@ -127,6 +130,25 @@ body
         display: block
         padding: 0
 
+    .glyph_bamboo, .glyph_blossom, .glyph_bonsai, .glyph_garden
+      color: #000
+      font-family: waza
+      font-size: 80px
+      text-align: center
+      -webkit-font-smoothing: antialiased
+
+    .glyph_bamboo:before
+      content: "\62\61\6d\62\6f\6f"
+
+    .glyph_blossom:before
+      content: "\62\6c\6f\73\73\6f\6d"
+
+    .glyph_bonsai:before
+      content: "\62\6f\6e\73\61\69"
+
+    .glyph_garden:before
+      content: "\67\61\72\64\65\6e"
+
     .extra
       border-bottom: 1px solid #dedede
       color: $light
@@ -188,7 +210,13 @@ body
         color: #7a7a8a
         margin: 0 10px 0 0
 
+  #archive_link
+    @include content
+    margin: 40px 0
+
   #archive, #other_articles
+    @include content
+    font-family: $sans_serif
 
     ol, ul
 
