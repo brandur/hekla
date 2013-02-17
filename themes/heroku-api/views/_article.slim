@@ -1,27 +1,24 @@
 article
-  - if @article.id % 4 == 0
-    p.glyph_bamboo
-  - elsif @article.id % 4 == 1
-    p.glyph_blossom
-  - elsif @article.id % 4 == 2
-    p.glyph_bonsai
-  - else
-    p.glyph_garden
   - if @link_article
     == link_to @article, { "data-pjax" => "#content", "class" => "vanilla" } do
+      == render :slim, :"_glyph", layout: false
       h1= @article.title
   - else
+    == render :slim, :"_glyph", layout: false
     h1= @article.title
-  p.extra_before February 15 / San Francisco
+  p.extra_before
+    | #{@article.published_at.strftime("%B %e")}
+    - if @article.metadata && @article.metadata[:location]
+      |  / #{@article.metadata[:location]}
   == @article.content_html
   .extra
-    / @article.metadata[:twitter] and @article.metadata[:email]
-    - if @article.metadata && @article.metadata[:email] && @article.metadata[:twitter]
+    - if @article.metadata && @article.metadata[:bio] && @article.metadata[:email] && @article.metadata[:twitter]
       == link_to "https://twitter.com/#{@article.metadata[:twitter]}" do
         img src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@article.metadata[:email])}?s=80"
-    p
-      - @article.metadata && if @article.metadata[:twitter]
-        | <a href="https://twitter.com/#{@article.metadata[:twitter]}">@#{@article.metadata[:twitter]}</a> 
-      | is the API team's static. Chiefly responsible for keeping his overzealous teammates from coding the Heroku API straight into its own singularity.
-    p.meta February 15 / San Francisco / #{{link_to 'Permalink', @article, "data-pjax" => "#content"}}
-    /p.meta #{@article.published_at.iso8601} / #{{link_to 'Permalink', @article, "data-pjax" => "#content"}}
+      p
+        | <a href="https://twitter.com/#{@article.metadata[:twitter]}">@#{@article.metadata[:twitter]}</a> #{@article.metadata[:bio]}
+    p.meta
+      | #{@article.published_at.strftime("%B %e")} / 
+      - if @article.metadata && @article.metadata[:location]
+        | #{@article.metadata[:location]} / 
+      | #{{link_to 'Permalink', @article, "data-pjax" => "#content"}}
