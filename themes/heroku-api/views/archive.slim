@@ -1,6 +1,7 @@
 - if pjax?
   title= @title
 #archive
+  .glyph_garden
   h1 Archive
   - @articles.each do |year, articles|
     - if year != Date.today.year

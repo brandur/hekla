@@ -130,27 +130,6 @@ body
         display: block
         padding: 0
 
-    .glyph_bamboo, .glyph_blossom, .glyph_bonsai, .glyph_garden
-      color: #000
-      font-family: waza
-      font-size: 80px
-      speak: none
-      text-align: center
-      text-rendering: optimizeLegibility
-      -webkit-font-smoothing: antialiased
-
-    .glyph_bamboo:before
-      content: "\62\61\6d\62\6f\6f"
-
-    .glyph_blossom:before
-      content: "\62\6c\6f\73\73\6f\6d"
-
-    .glyph_bonsai:before
-      content: "\62\6f\6e\73\61\69"
-
-    .glyph_garden:before
-      content: "\67\61\72\64\65\6e"
-
     .extra
       border-bottom: 1px solid #dedede
       color: $light
@@ -212,13 +191,31 @@ body
         color: #7a7a8a
         margin: 0 10px 0 0
 
-  #archive_link
-    @include content
-    margin: 40px 0
+  .glyph_bamboo, .glyph_blossom, .glyph_bonsai, .glyph_garden
+    color: #000
+    font-family: waza
+    font-size: 80px
+    speak: none
+    text-align: center
+    text-rendering: optimizeLegibility
+    -webkit-font-smoothing: antialiased
+
+  .glyph_bamboo:before
+    content: "\62\61\6d\62\6f\6f"
+
+  .glyph_blossom:before
+    content: "\62\6c\6f\73\73\6f\6d"
+
+  .glyph_bonsai:before
+    content: "\62\6f\6e\73\61\69"
+
+  .glyph_garden:before
+    content: "\67\61\72\64\65\6e"
 
   #archive, #other_articles
     @include content
     font-family: $sans_serif
+    margin: 40px auto
 
     ol, ul
 
