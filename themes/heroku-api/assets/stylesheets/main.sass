@@ -23,9 +23,9 @@ $normal: #444
 body
   background: #fff
   color: $normal
-  font-family: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
-  font-size: 18px
-  line-height: 1.6em
+  font-family: georgia, serif
+  font-size: 19px
+  line-height: 1.7em
 
   a
     color: #7c76b8
@@ -47,14 +47,15 @@ body
 
   h1, h2, h3, h4
     color: $dark
+    font-family: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
+    font-weight: 200
     line-height: 1.4em
     margin-bottom: 30px
     margin-top: 30px
 
   h1
     border-bottom: 1px solid #bcbcbc
-    font-family: georgia, serif
-    font-size: 40px
+    font-size: 45px
     margin: 40px auto 20px auto
     max-width: 800px
     padding: 20px 0 40px 0
@@ -129,19 +130,26 @@ body
     .extra
       border-bottom: 1px solid #dedede
       color: $light
-      font-size: 14px
+      font-size: 16px
+      line-height: 1.6em
       padding-bottom: 16px
       text-align: center
 
       img
-        border-radius: 10px
+        border-radius: 40px
+        //float: left
         margin: 0 10px 0 0
         vertical-align: middle
+
+      .meta
+        color: $light
+        font-size: 14px
+        font-style: italic
+        text-transform: uppercase
 
     .extra_before
       border-bottom: 1px solid #dedede
       color: $light
-      font-family: georgia, serif
       font-size: 14px
       font-style: italic
       margin-bottom: 40px
