@@ -6,4 +6,7 @@
     @next_article ? @next_article.id : nil \
   ].compact)
 == render :slim, :"_article", layout: false
-== render :slim, :"_other_articles", layout: false
+/== render :slim, :"_other_articles", layout: false
+#archive_link
+  == link_to "/archive", "data-pjax" => "#content" do
+    | Archive &rarr;
