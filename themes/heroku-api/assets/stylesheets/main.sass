@@ -6,7 +6,7 @@ $serif: georgia, serif
 $sans_serif: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-serif
 
 @mixin attachment
-  background: #e7e7ee url('/assets/pattern-seigaiha.png') repeat
+  background: #e9e9ef url('/assets/pattern-seigaiha.png') repeat
   margin-bottom: 40px
   margin-top: 40px
   overflow: hidden
@@ -15,8 +15,6 @@ $sans_serif: "proxima-nova", "helvetica neue", helvetica, arial, geneva, sans-se
   box-shadow:         inset 0 10px 10px -10px rgba(0, 0, 0, 0.3), inset 0 -10px 10px -10px rgba(0, 0, 0, 0.3)
   -moz-box-shadow:    inset 0 10px 10px -10px rgba(0, 0, 0, 0.3), inset 0 -10px 10px -10px rgba(0, 0, 0, 0.3)
   -webkit-box-shadow: inset 0 10px 10px -10px rgba(0, 0, 0, 0.3), inset 0 -10px 10px -10px rgba(0, 0, 0, 0.3)
-
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3)
 
 @mixin content
   margin: 0 auto
@@ -28,7 +26,7 @@ body
   background: #fff
   color: $normal
   font-family: $serif
-  font-size: 19px
+  font-size: 17px
   line-height: 1.7em
 
   a
@@ -134,19 +132,20 @@ body
     .extra
       border-bottom: 1px solid #dedede
       color: $light
+      font-family: $sans_serif
       font-size: 16px
-      line-height: 1.6em
+      line-height: 1.5em
       padding-bottom: 16px
       text-align: center
 
       img
         border-radius: 40px
-        //float: left
         margin: 0 10px 0 0
         vertical-align: middle
 
       .meta
         color: $light
+        font-family: $serif
         font-size: 14px
         font-style: italic
         text-transform: uppercase
@@ -227,7 +226,7 @@ body
       color: $light
 
 
-@media only screen and (max-width: 800px)
+@media only screen and (max-width: 600px)
   body
-    font-size: 16px
+    font-size: 15px
     line-height: 1.5em
