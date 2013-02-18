@@ -1,7 +1,6 @@
 initSyntax = ->
   $.SyntaxHighlighter.init 
     'lineNumbers': false 
-    'theme': 'sunburst' 
     'wrapLines': true 
 
 $(document).ready ->
