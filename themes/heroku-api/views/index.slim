@@ -4,7 +4,3 @@
   - @article = article
   - @link_article = true
   == render :slim, :"_article", layout: false
-#archive_link
-  == link_to "/archive", "data-pjax" => "#content" do
-    | Archive &rarr;
-== render :slim, :"_about", layout: false
