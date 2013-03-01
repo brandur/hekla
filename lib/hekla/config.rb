@@ -8,6 +8,10 @@ module Hekla
       @robots_disabled ||= %w{1 true yes}.include?(env("DISABLE_ROBOTS"))
     end
 
+    def force_ssl?
+      @force_ssl ||= %w{1 true yes}.include?(env("FORCE_SSL"))
+    end
+
     def http_api_key
       @http_api_key ||= env!("HTTP_API_KEY")
     end
