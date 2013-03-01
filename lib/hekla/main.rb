@@ -1,6 +1,6 @@
 module Hekla
   Main = Rack::Builder.new do
-    use Rack::SSL if Hekla::Config.production?
+    #use Rack::SSL if Hekla::Config.production?
     use Rack::Instruments
     use Rack::Cache,
       verbose: true,
