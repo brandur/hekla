@@ -20,9 +20,9 @@ html lang='en'
   body
     header
       #title
-        == link_to "/", "data-pjax" => "#content" do
+        a href="https://www.heroku.com"
           strong Heroku
-          | API Development Blog
+        a href="/" data-pjax="#content" API Development Blog
     #content
       == yield
     nav
