@@ -1,6 +1,7 @@
 module Hekla
   Main = Rack::Builder.new do
     use Rack::SSL if Hekla::Config.force_ssl?
+    use Rack::Deflater
     use Rack::Instruments
     use Rack::Cache,
       verbose: true,
