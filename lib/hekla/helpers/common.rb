@@ -10,7 +10,7 @@ module Hekla::Helpers
 
     def log(action, attrs = {})
       # REQUEST_ID inserted by rack-instruments
-      Slides.log(action, attrs.merge!(id: request.env["REQUEST_ID"]))
+      Slides.log(action, attrs.merge!(request_id: request.env["REQUEST_IDS"]))
     end
 
     def log_error(e)
