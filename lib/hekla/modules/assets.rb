@@ -18,18 +18,15 @@ module Hekla::Modules
     end
 
     get "/assets/:release/app.css" do
-      content_type("text/css")
       respond_with_asset(@assets["app.css"])
     end
 
     get "/assets/:release/app.js" do
-      content_type("application/javascript")
       respond_with_asset(@assets["app.js"])
     end
 
     %w{jpg png}.each do |format|
       get "/assets/:image.#{format}" do |image|
-        content_type("image/#{format}")
         respond_with_asset(@assets["#{image}.#{format}"])
       end
     end
@@ -38,6 +35,7 @@ module Hekla::Modules
 
     def respond_with_asset(asset)
       cache_control(:public, max_age: 2592000)
+      content_type(asset.content_type)
       last_modified(asset.mtime.utc)
       asset
     end
