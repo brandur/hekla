@@ -9,7 +9,7 @@ article
   p.extra_before
     | #{@article.published_at.strftime("%B %e")}
     - if @article.metadata && @article.metadata[:location]
-      |  / #{@article.metadata[:location]}
+      |  &middot; #{@article.metadata[:location]}
   == @article.content_html
   .extra
     - if @article.metadata && @article.metadata[:bio] && @article.metadata[:email] && @article.metadata[:twitter]
@@ -18,7 +18,7 @@ article
       p
         | <a href="https://twitter.com/#{@article.metadata[:twitter]}">@#{@article.metadata[:twitter]}</a> #{@article.metadata[:bio]}
     p.meta
-      | #{@article.published_at.strftime("%B %e")} / 
+      | #{@article.published_at.strftime("%B %e")} &middot; 
       - if @article.metadata && @article.metadata[:location]
-        | #{@article.metadata[:location]} / 
+        | #{@article.metadata[:location]} &middot; 
       | #{{link_to 'Permalink', @article, "data-pjax" => "#content"}}
