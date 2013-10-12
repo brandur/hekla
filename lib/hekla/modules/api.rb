@@ -12,6 +12,11 @@ module Hekla::Modules
     # Error handling
     #
 
+    error Hekla::Error do
+      e = env["sinatra.error"]
+      [e.status, e.message]
+    end
+
     error Sequel::ValidationFailed do
       [422, encode_json(@article.errors.flatten)]
     end

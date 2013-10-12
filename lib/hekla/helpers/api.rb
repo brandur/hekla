@@ -1,10 +1,21 @@
 module Hekla::Helpers
   module API
+
     def article_params
       metadata = if params[:attributes] && params[:content]
         eval(params[:attributes]).merge!({ content: params[:content] })
+      elsif params[:content]
+        if params[:content] =~ /\A(---\n.*?\n---)\n(.*)\Z/m
+          Psych.load($1).merge({ content: $2.strip })
+        else
+          raise Hekla::BadRequest.new("Require front matter metadata.")
+        end
       else
-        MultiJson.decode(params[:article])
+        begin
+          MultiJson.decode(params[:article])
+        rescue MultiJson::LoadError
+          raise Hekla::BadRequest.new("Couldn't parse JSON.")
+        end
       end
       metadata.symbolize_keys!
       attrs, metadata =
