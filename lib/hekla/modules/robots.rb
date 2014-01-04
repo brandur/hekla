@@ -1,5 +1,7 @@
 module Hekla::Modules
   class Robots < Sinatra::Base
+    include Hekla::Helpers::Common
+
     #
     # Error handling
     #
