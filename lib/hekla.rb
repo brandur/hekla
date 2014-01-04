@@ -13,6 +13,7 @@ require_relative "hekla/models/article"
 
 require_relative "hekla/modules/api"
 require_relative "hekla/modules/assets"
+require_relative "hekla/modules/robots"
 require_relative "hekla/modules/web"
 
 require_relative "hekla/main"

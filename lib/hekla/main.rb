@@ -12,6 +12,7 @@ module Hekla
     run Sinatra::Router.new {
       mount Hekla::Modules::Assets
       mount Hekla::Modules::API
+      mount Hekla::Modules::Robots
       run Hekla::Modules::Web
     }
   end
