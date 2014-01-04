@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby "2.1.0"
+
 gem "builder"
 gem "coffee-script"
 gem "multi_json"

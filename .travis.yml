@@ -1,8 +1,6 @@
 language: ruby
 notifications:
   email: false
-rvm:
-  - 2.0.0
 before_script:
   - createdb hekla-test
   - bundle exec sequel -m db/migrate "postgres://localhost/hekla-test"
