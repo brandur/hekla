@@ -5,7 +5,7 @@ module Hekla::Helpers
     include Common
 
     def etag!(article)
-      return if !article || !Hekla::Config.production?
+      return if !article || Hekla::Config.development?
       tag = [
         Hekla::Config.release,
         request.path_info,
@@ -16,7 +16,7 @@ module Hekla::Helpers
     end
 
     def last_modified!(article)
-      return if !article || !Hekla::Config.production?
+      return if !article || Hekla::Config.development?
       last_modified(article.updated_at.utc)
     end
   end

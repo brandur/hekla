@@ -4,6 +4,10 @@ module Hekla
   module Config
     extend self
 
+    def development?
+      rack_env == "development"
+    end
+
     def disable_robots?
       @robots_disabled ||= %w{1 true yes}.include?(env("DISABLE_ROBOTS"))
     end
