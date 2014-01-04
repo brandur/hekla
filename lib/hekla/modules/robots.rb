@@ -33,7 +33,7 @@ module Hekla::Modules
           robots += "Disallow: /#{article.slug}\n"
         end
       end
-      robots
+      [200, robots]
     end
   end
 end

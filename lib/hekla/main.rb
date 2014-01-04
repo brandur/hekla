@@ -7,7 +7,6 @@ module Hekla
       verbose:     true,
       metastore:   'file:/tmp/cache/meta',
       entitystore: 'file:/tmp/cache/entity' if Config.production?
-    use Rack::Robots
 
     run Sinatra::Router.new {
       mount Hekla::Modules::Assets
