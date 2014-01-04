@@ -1,0 +1,8 @@
+language: ruby
+notifications:
+  email: false
+rvm:
+  - 2.0.0
+before_script:
+  - psql -c 'create database hekla-test`;' -U postgres
+  - sequel -m db/migrate "postgres://localhost/hekla-test"
