@@ -2,8 +2,6 @@ source "https://rubygems.org"
 
 gem "builder"
 gem "coffee-script"
-gem "dalli"
-gem "kgio" # optional 20-30% performance boost for Dalli
 gem "multi_json"
 gem "oj"
 gem "pg"
