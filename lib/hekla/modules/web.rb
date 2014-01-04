@@ -5,9 +5,7 @@ module Hekla::Modules
     include Hekla::Helpers::Web
 
     configure do
-      set :root,  Hekla::Config.root
-      set :views, settings.root + "/themes/#{Hekla::Config.theme}/views"
-      Slides.log :views, path: settings.views
+      set :views, Hekla::Config.root + "/themes/#{Hekla::Config.theme}/views"
       Slim::Engine.set_default_options format: :html5, pretty: true
     end
 
