@@ -10,6 +10,14 @@ module Hekla::Modules
     end
 
     #
+    # Filters
+    #
+
+    before do
+      log :request_info
+    end
+
+    #
     # Routes
     #
 
