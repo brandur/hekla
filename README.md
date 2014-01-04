@@ -60,5 +60,5 @@ Run the test suite with:
 
 ``` bash
 sequel -m db/migrate "postgres://localhost/the-surf-test"
-bundle exec bin/test
+rake
 ```
