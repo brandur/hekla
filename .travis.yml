@@ -4,5 +4,5 @@ notifications:
 rvm:
   - 2.0.0
 before_script:
-  - psql -c 'create database hekla-test`;' -U postgres
+  - createdb hekla-test
   - sequel -m db/migrate "postgres://localhost/hekla-test"
