@@ -1,5 +1,7 @@
 module Hekla::Modules
   class Default < Sinatra::Base
+    include Hekla::Helpers::Common
+
     #
     # Filters
     #
