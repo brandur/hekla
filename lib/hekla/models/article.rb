@@ -2,8 +2,9 @@ class Article < Sequel::Model
   plugin :timestamps, update_on_create: true
   plugin :validation_helpers
 
-  def self.ordered
-    reverse_order(:published_at)
+  def self.index
+    filter("not metadata ? 'hidden' or metadata -> 'hidden' != 'true'").
+      reverse_order(:published_at)
   end
 
   def content_html
@@ -11,11 +12,11 @@ class Article < Sequel::Model
   end
 
   def next
-    Article.ordered.where("published_at > ?", published_at).last
+    Article.index.where("published_at > ?", published_at).last
   end
 
   def prev
-    Article.ordered.where("published_at < ?", published_at).first
+    Article.index.where("published_at < ?", published_at).first
   end
 
   def summary_html

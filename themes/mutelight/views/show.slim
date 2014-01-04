@@ -17,7 +17,7 @@ article
         strong= @article.metadata[:location]
 h2 Newest Articles
 ul.article
-  - Article.ordered.limit(3).where("id <> ?", @article.id).each do |article|
+  - Article.index.limit(3).where("id <> ?", @article.id).each do |article|
     li
       == link_to article.title, article, "data-pjax" => "#content"
       span.alternate

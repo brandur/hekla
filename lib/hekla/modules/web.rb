@@ -35,23 +35,26 @@ module Hekla::Modules
     #
 
     get "/" do
-      etag!(Article.ordered.first)
-      last_modified!(Article.ordered.first)
-      @articles = Article.ordered.limit(10)
+      articles = Article.index
+      etag!(articles.first)
+      last_modified!(articles.first)
+      @articles = articles.limit(10)
       slim :index, layout: !pjax?
     end
 
     get "/articles.atom" do
-      etag!(Article.ordered.first)
-      last_modified!(Article.ordered.first)
-      @articles = Article.ordered.limit(20)
+      articles = Article.index
+      etag!(articles.first)
+      last_modified!(articles.first)
+      @articles = articles.limit(20)
       builder :articles
     end
 
     get "/archive" do
-      etag!(Article.ordered.first)
-      last_modified!(Article.ordered.first)
-      @articles = Article.ordered.all.group_by { |a| a.published_at.year }
+      articles = Article.index
+      etag!(articles.first)
+      last_modified!(articles.first)
+      @articles = articles.all.group_by { |a| a.published_at.year }
         .sort.reverse
       @title = "Archive"
       slim :archive, layout: !pjax?

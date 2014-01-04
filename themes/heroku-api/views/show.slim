@@ -1,6 +1,6 @@
 - if pjax?
   title= @title
-- @other_articles = Article.ordered.limit(3).where("id NOT IN ?",[ \
+- @other_articles = Article.index.limit(3).where("id NOT IN ?",[ \
     @article.id, \
     @prev_article ? @prev_article.id : nil, \
     @next_article ? @next_article.id : nil \
