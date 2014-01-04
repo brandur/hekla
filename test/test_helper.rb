@@ -1,3 +1,8 @@
+ENV["HTTP_API_KEY"] = "KEY"
+# make sure to set RACK_ENV=test before requiring Sinatra
+ENV["RACK_ENV"]     = "test"
+ENV["THEME"]        = "the-surf"
+
 require 'bundler/setup'
 Bundler.require(:default, :test)
 
@@ -5,10 +10,6 @@ require "minitest/spec"
 require "minitest/autorun"
 require "turn/autorun"
 require "rr"
-
-ENV["HTTP_API_KEY"] = "KEY"
-ENV["RACK_ENV"]     = "test"
-ENV["THEME"]        = "the-surf"
 
 database_url = "postgres://localhost/the-surf-test"
 DB = Sequel.connect(database_url)

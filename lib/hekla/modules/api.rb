@@ -4,10 +4,6 @@ module Hekla::Modules
     include Hekla::Helpers::Authentication
     include Hekla::Helpers::Common
 
-    configure do
-      set :show_exceptions, false
-    end
-
     #
     # Error handling
     #
