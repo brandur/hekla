@@ -1,7 +1,10 @@
-ENV["HTTP_API_KEY"] = "KEY"
+ENV["DISABLE_ROBOTS"] = "false"
+ENV["FORCE_SSL"]      = "false"
+ENV["HTTP_API_KEY"]   = "KEY"
 # make sure to set RACK_ENV=test before requiring Sinatra
-ENV["RACK_ENV"]     = "test"
-ENV["THEME"]        = "the-surf"
+ENV["RACK_ENV"]       = "test"
+ENV["RELEASE"]        = "1"
+ENV["THEME"]          = "the-surf"
 
 require 'bundler/setup'
 Bundler.require(:default, :test)
