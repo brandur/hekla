@@ -1,3 +1,4 @@
+ENV["DATABASE_URL"]   = "postgres://localhost/hekla-test"
 ENV["DISABLE_ROBOTS"] = "false"
 ENV["FORCE_SSL"]      = "false"
 ENV["HTTP_API_KEY"]   = "KEY"
@@ -14,8 +15,7 @@ require "minitest/autorun"
 require "turn/autorun"
 require "rr"
 
-database_url = "postgres://localhost/the-surf-test"
-DB = Sequel.connect(database_url)
+DB = Sequel.connect(ENV["DATABASE_URL"])
 
 require_relative "../lib/hekla"
 
