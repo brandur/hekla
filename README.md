@@ -59,6 +59,7 @@ Testing
 Run the test suite with:
 
 ``` bash
-sequel -m db/migrate "postgres://localhost/the-surf-test"
+createdb hekla-test
+bundle exec sequel -m db/migrate "postgres://localhost/hekla-test"
 rake
 ```
