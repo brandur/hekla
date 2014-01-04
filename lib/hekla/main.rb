@@ -4,10 +4,9 @@ module Hekla
     use Rack::Instruments
     use Rack::Deflater
     use Rack::Cache,
-      verbose: true,
-      entitystore: Hekla::Config.memcached_url + "/body",
-      metastore:   Hekla::Config.memcached_url + "/meta" \
-      if Hekla::Config.memcached_url
+      verbose:     true,
+      metastore:   'file:/tmp/cache/meta',
+      entitystore: 'file:/tmp/cache/entity' if Config.production?
     use Rack::Robots
 
     run Sinatra::Router.new {
