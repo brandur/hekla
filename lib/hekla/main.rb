@@ -12,7 +12,8 @@ module Hekla
       mount Hekla::Modules::Assets
       mount Hekla::Modules::API
       mount Hekla::Modules::Robots
-      run Hekla::Modules::Web
+      mount Hekla::Modules::Web
+      run Hekla::Modules::Default
     }
   end
 end
