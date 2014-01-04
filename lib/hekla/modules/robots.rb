@@ -14,13 +14,13 @@ module Hekla::Modules
     #
 
     get "/robots.txt" do
-      robots = "User-agent: *"
+      robots = "User-agent: *\n"
       if Hekla::Config.disable_robots?
-        robots += "Disallow: /"
+        robots += "Disallow: /\n"
       else
         articles = Article.filter("metadata -> 'hidden' = 'true'")
         articles.each do |article|
-          robots += "Disallow: /#{article.slug}"
+          robots += "Disallow: /#{article.slug}\n"
         end
       end
       robots
