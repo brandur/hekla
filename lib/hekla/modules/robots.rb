@@ -28,7 +28,7 @@ module Hekla::Modules
       if Hekla::Config.disable_robots?
         robots += "Disallow: /\n"
       else
-        articles = Article.filter("metadata -> 'hidden' = 'true'")
+        articles = Article.filter("metadata -> 'hidden' = 'true'").order("slug")
         articles.each do |article|
           robots += "Disallow: /#{article.slug}\n"
         end
