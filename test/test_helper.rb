@@ -11,9 +11,18 @@ require 'bundler/setup'
 Bundler.require(:default, :test)
 
 require "minitest/spec"
+require 'minitest/pride'
 require "minitest/autorun"
-require "turn/autorun"
 require "rr"
+
+# suppress logging
+unless ENV["TEST_LOGS"] == "true"
+  module Slides
+    def self.log(*_)
+      yield if block_given?
+    end
+  end
+end
 
 DB = Sequel.connect(ENV["DATABASE_URL"])
 

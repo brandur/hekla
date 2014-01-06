@@ -27,5 +27,4 @@ gem "yui-compressor"
 group :development, :test do
   gem "rack-test"
   gem "rr"
-  gem "turn"
 end
