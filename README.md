@@ -28,7 +28,6 @@ export HTTP_API_KEY=$(ruby -e "require 'securerandom'; puts SecureRandom.hex(20)
 heroku config:add THEME=the-surf HTTP_API_KEY=$HTTP_API_KEY
 git push heroku
 heroku run 'sequel -m db/migrate $DATABASE_URL'
-heroku addons:add memcache:5mb
 ```
 
 Upload an article using a template like
