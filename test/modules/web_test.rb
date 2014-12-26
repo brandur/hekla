@@ -117,7 +117,7 @@ describe Hekla::Modules::Web do
 
   describe "GET /a/:id" do
     before do
-      attributes = valid_attributes.merge!(metadata: { tiny_slug: "7" }.hstore)
+      attributes = valid_attributes.merge!(metadata: Sequel.hstore({ tiny_slug: "7" }))
       Article.new(attributes).save
     end
 

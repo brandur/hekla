@@ -20,7 +20,7 @@ module Hekla::Helpers
       metadata.symbolize_keys!
       attrs, metadata =
         metadata.split(:title, :slug, :summary, :content, :published_at)
-      attrs.merge!({ metadata: metadata.hstore }) if metadata.count > 0
+      attrs.merge!({ metadata: Sequel.hstore(metadata) }) if metadata.count > 0
       attrs
     end
   end
